@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/styles.css" />
+<title>Administrator work - edit product</title>
+</head>
+<body>
+
+			<div class="add-product">
+			<h2>Add new product here</h2>
+			<form action="/editProduct" method="post" enctype="multipart/form-data">
+				<input readonly name="pid" th:value="${product.pid}" /> <br>
+				<input type="text" name="pname" placeholder="Product Name" required/> <br>
+				<input type="text" name="brand" placeholder="Brand" required/> <br>
+				<input type="text" name="price" placeholder="Price" required/> <br>
+				<textarea name="pdescription" placeholder="Description" required></textarea><br>
+				<div class="displayphoto">
+					<img class="pimg" th:if="${product.photoBase64}"
+						 th:src="'data:image/jpeg;base64,' + ${product.photoBase64}" 
+						 alt="Something went wrong!">
+					<img class="pimg" th:if="${product.photo1Base64}"
+						 th:src="'data:image/jpeg;base64,' + ${product.photo1Base64}" 
+						 alt="Something went wrong!">
+					<img class="pimg" th:if="${product.photo2Base64}"
+						 th:src="'data:image/jpeg;base64,' + ${product.photo2Base64}" 
+						 alt="Something went wrong!">
+				</div>
+				<div class="addphoto">
+					<input type="file" name="pimage" accept="image/*" /> 
+					<input type="file" name="image1" accept="image/*" /> 
+					<input type="file" name="image2" accept="image/*" /> 
+				</div>
+				<br>
+			
+				<button type="submit">Update</button>
+			</form>
+		</div>
+
+</body>
+</html>

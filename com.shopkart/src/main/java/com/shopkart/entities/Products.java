@@ -32,11 +32,35 @@ public class Products {
 	@Column(columnDefinition="LONGBLOB")
 	private byte[] pimage;
 	
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@Column(columnDefinition="LONGBLOB")
+	private byte[] image1;
+	
+	@Lob
+	@Basic(fetch = FetchType.LAZY)
+	@Column(columnDefinition="LONGBLOB")
+	private byte[] image2;
+	
 	public String getPhotoBase64() {
         if (pimage == null) {
             return null;
         }
         return Base64.getEncoder().encodeToString(pimage);
+    }
+	
+	public String getPhoto1Base64() {
+        if (image1 == null) {
+            return null;
+        }
+        return Base64.getEncoder().encodeToString(image1);
+    }
+	
+	public String getPhoto2Base64() {
+        if (image2 == null) {
+            return null;
+        }
+        return Base64.getEncoder().encodeToString(image2);
     }
 
 	public Products() {
@@ -44,7 +68,8 @@ public class Products {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Products(Long pid, String pname, String brand, String price, String pdescription,  byte[] pimage ) {
+	public Products(Long pid, String pname, String brand, String price, String pdescription, byte[] pimage,
+			byte[] image1, byte[] image2) {
 		super();
 		this.pid = pid;
 		this.pname = pname;
@@ -52,6 +77,8 @@ public class Products {
 		this.price = price;
 		this.pdescription = pdescription;
 		this.pimage = pimage;
+		this.image1 = image1;
+		this.image2 = image2;
 	}
 
 	public Long getPid() {
@@ -100,13 +127,31 @@ public class Products {
 
 	public void setPimage(byte[] pimage) {
 		this.pimage = pimage;
+	}
 
+	public byte[] getImage1() {
+		return image1;
+	}
+
+	public void setImage1(byte[] image1) {
+		this.image1 = image1;
+	}
+
+	public byte[] getImage2() {
+		return image2;
+	}
+
+	public void setImage2(byte[] image2) {
+		this.image2 = image2;
 	}
 
 	@Override
 	public String toString() {
 		return "Products [pid=" + pid + ", pname=" + pname + ", brand=" + brand + ", price=" + price + ", pdescription="
-				+ pdescription  + ", pimage=" + Arrays.toString(pimage)  + "]";
+				+ pdescription + ", pimage=" + Arrays.toString(pimage) + ", image1=" + Arrays.toString(image1)
+				+ ", image2=" + Arrays.toString(image2) + "]";
 	}
+
+	
 	
 }
