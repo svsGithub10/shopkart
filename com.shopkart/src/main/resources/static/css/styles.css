@@ -242,7 +242,7 @@ display: flex;
 }
 }
 
-.add-product, form{
+.add-product{
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -254,7 +254,7 @@ display: flex;
 input, textarea{
     background-color: #eee;
     border: none;
-    margin: 0;
+    margin: auto;
     border: solid 1px gray;
    	padding:10px 15px;
     font-size: 13px;
@@ -274,4 +274,43 @@ button{
     text-transform: uppercase;
     margin-top: 10px;
     cursor: pointer;
+}
+
+.update-product {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: auto;
+	h2{
+		font-size: 48px;
+	}
+	.specs{
+		height: 180px;
+	}
+	.displayphoto, .addphoto, .pimg{
+	display: flex;
+	padding: auto;
+	align-items: center;
+	padding: 10px 10px 0 10px;
+		input{
+		border: none;
+		
+	}
+	}
+	label{
+	padding: 10px;
+	}
+
+}
+
+form {
+	
+	display: flex;
+	flex-direction: column;
+	margin: auto;
+	align-items: center;
+	label { 
+	 width: 75%;
+	 font-weight: 1000;
+	}
 }

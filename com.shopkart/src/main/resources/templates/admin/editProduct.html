@@ -1,44 +1,102 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
-<link rel="stylesheet" href="/css/styles.css" />
-<title>Administrator work - edit product</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>Administrator work - edit product</title>
 </head>
+
 <body>
+    <nav class="navigation">
+        <h1>
+            <span class="logo"><img src="/images/logo.png" alt="ShopKartlogo">Administrator</span>
+        </h1>
+        <div class="search-bar"></div>
+        <div class="nav-links">
+            <a class="logout" href="/admin">logout</a>
+        </div>
+    </nav>
+    <script th:if="${successMessage}" th:inline="javascript">
+        alert('[[${successMessage}]]');
+    </script>
+    <script th:if="${errorMessage}" th:inline="javascript">
+        alert('[[${errorMessage}]]');
+    </script>
+    <div class="user-body">
+        <div class="user-menu">
+            <div class="contain">
+                <a href="#" class="user"><img src="/images/profile.jpg" alt="profile">
+                    <p>Admin-ID</p>
+                </a>
+                <div>
+                    <a href="#"><i class="fa-solid fa-box-open"></i>All Orders</a>
+                </div>
+                <div>
+                    <a href="#"><i class="fa-solid fa-user"></i>All Users</a>
+                </div>
+                <div>
+                    <a href="#"><i class="fa-solid fa-bell"></i>Contact
+                        notification</a>
+                </div>
+                <div class="add-product">
+                    <h2>Add new product here</h2>
+                    <form action="/addProduct" method="post" enctype="multipart/form-data">
+                        <input type="text" name="pname" placeholder="Product Name" required /> <br>
+                        <input type="text" name="brand" placeholder="Brand" required /> <br> 
+                        <input type="text" name="price" placeholder="Price" required /> <br>
+                        <textarea name="pdescription" placeholder="Description" required></textarea>
+                        <br> <input type="file" name="pimage" class="addphoto" accept="image/*" /> <br>
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container-p">
+            <div class="update-product">
+                <h2>Update product</h2>
+                <form action="/editProduct" method="post" enctype="multipart/form-data">
+                	
+                    <label>Product ID:</label>  <input readonly th:value="${product.pid}" name="pid" /> <br>
+                   
+                    <label>Product Name: </label> <input type="text" name="pname" placeholder="Product Name" th:value="${product.pname}" /> <br>
+                    <label>Product Brand: </label><input type="text" name="brand" placeholder="Brand" th:value="${product.brand}" /> <br>
+                    <label>Product Price: </label><input type="text" name="price" placeholder="Price" th:value="${product.price}" /> <br>
+                    <label>Product Specs/Description: </label><textarea name="pdescription" class="specs" placeholder="Description" th:text="${product.pdescription}"></textarea><br>
+                    <div class="displayphoto">
+                    <div>
+                                                
+                        <label>Left image: </label>
+                        <img class="pimg" th:if="${product.photo1Base64}"
+                            th:src="'data:image/jpeg;base64,' + ${product.photo1Base64}" alt="Something went wrong!">
+                              </div>
+                              <div>
+                    	<label>Main image: </label>
+                        <img class="pimg" th:if="${product.photoBase64}"
+                            th:src="'data:image/jpeg;base64,' + ${product.photoBase64}" alt="Something went wrong!">
+                            </div>
 
-			<div class="add-product">
-			<h2>Add new product here</h2>
-			<form action="/editProduct" method="post" enctype="multipart/form-data">
-				<input readonly name="pid" th:value="${product.pid}" /> <br>
-				<input type="text" name="pname" placeholder="Product Name" required/> <br>
-				<input type="text" name="brand" placeholder="Brand" required/> <br>
-				<input type="text" name="price" placeholder="Price" required/> <br>
-				<textarea name="pdescription" placeholder="Description" required></textarea><br>
-				<div class="displayphoto">
-					<img class="pimg" th:if="${product.photoBase64}"
-						 th:src="'data:image/jpeg;base64,' + ${product.photoBase64}" 
-						 alt="Something went wrong!">
-					<img class="pimg" th:if="${product.photo1Base64}"
-						 th:src="'data:image/jpeg;base64,' + ${product.photo1Base64}" 
-						 alt="Something went wrong!">
-					<img class="pimg" th:if="${product.photo2Base64}"
-						 th:src="'data:image/jpeg;base64,' + ${product.photo2Base64}" 
-						 alt="Something went wrong!">
-				</div>
-				<div class="addphoto">
-					<input type="file" name="pimage" accept="image/*" /> 
-					<input type="file" name="image1" accept="image/*" /> 
-					<input type="file" name="image2" accept="image/*" /> 
-				</div>
-				<br>
-			
-				<button type="submit">Update</button>
-			</form>
-		</div>
+                            <div>
+						<label>Right image: </label>
+                        <img class="pimg" th:if="${product.photo2Base64}"
+                            th:src="'data:image/jpeg;base64,' + ${product.photo2Base64}" alt="Something went wrong!">
+                            </div>
+                    </div>
+                    <div class="addphoto">
+                        <input type="file" name="image1" accept="image/*" />
+                        <input type="file" name="pimage" accept="image/*" />
 
+                        <input type="file" name="image2" accept="image/*" />
+                    </div>
+                    <br>
+                    <button type="submit">Update</button><br><br>
+                </form>
+            </div>
+        </div>
+    </div>
 </body>
+
 </html>

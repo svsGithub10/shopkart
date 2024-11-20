@@ -1,6 +1,6 @@
 package com.shopkart.controllers;
 
-import java.util.List;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.shopkart.entities.Admin;
-import com.shopkart.entities.Products;
+
 import com.shopkart.services.AdminService;
-import com.shopkart.services.ProductsService;
+
 
 @Controller
 public class AdminController {

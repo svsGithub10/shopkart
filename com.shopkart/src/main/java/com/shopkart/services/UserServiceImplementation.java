@@ -6,7 +6,6 @@ import org.springframework.stereotype.Service;
 import com.shopkart.entities.User;
 import com.shopkart.repositories.UserRepository;
 
-import jakarta.servlet.http.HttpSession;
 
 @Service
 public class UserServiceImplementation implements UserService {

@@ -36,7 +36,7 @@
 		alt="Something went wrong!">
 		<div class="product-info">
 			<div class="name">
-			<a href="#"><strong><span th:text="${product.brand}"></span></strong>
+			<a th:href="@{/orderProduct(pid = ${product.pid})}"><strong><span th:text="${product.brand}"></span></strong>
 			<span th:text="${product.pname}"></span></a></div>
 			<div class="price"><strong><span th:text="@{'₹'+${product.price}}+'.00'"></span></strong></div>
 			<span th:text="${product.pdescription}"></span>

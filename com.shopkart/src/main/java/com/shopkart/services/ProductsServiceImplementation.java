@@ -23,6 +23,23 @@ public class ProductsServiceImplementation implements ProductsService{
 	public List<Products> fetchAllProducts() {
 		// TODO Auto-generated method stub
 		return repo.findAll();
+	}
+
+	@Override
+	public Products findByPid(long pid) {
+		// TODO Auto-generated method stub
+		return repo.findById(pid);
+	}
+
+	@Override
+	public void updateProduct(Products product) {
+		repo.save(product);
+		
+	}
+
+	@Override
+	public void deleteProduct(Products product) {
+		repo.delete(product);		
 	}	
 	
 }

@@ -17,6 +17,12 @@
 		<a class="logout" href="/admin">logout</a>
 	</div>
 </nav>
+<script th:if="${successMessage}" th:inline="javascript">
+alert('[[${successMessage}]]');
+</script>
+<script th:if="${errorMessage}" th:inline="javascript">
+alert('[[${errorMessage}]]');
+</script>
 <div class="user-body">
 <div class="user-menu">
 	<div class="contain">
@@ -29,6 +35,7 @@
 		<div class="add-product">
 			<h2>Add new product here</h2>
 			<form action="/addProduct" method="post" enctype="multipart/form-data">
+				
 				<input type="text" name="pname" placeholder="Product Name" required/> <br>
 				<input type="text" name="brand" placeholder="Brand" required/> <br>
 				<input type="text" name="price" placeholder="Price" required/> <br>
@@ -42,8 +49,9 @@
 	</div>
 </div>
 <div class="container-p">
-		
+
 			<span class="product" th:each="product : ${allProducts}">
+
 			<div class="x">
 	    		<img class="pimg" th:if="${product.photoBase64}" th:src="'data:image/jpeg;base64,' + ${product.photoBase64}" 
 				alt="Something went wrong!">
@@ -61,8 +69,8 @@
 				</div>
 				
 				<div class="action-buttons">
-					<a href="/admin/editProduct" class="edit">Edit</a>
-					<a href="#" class="delete">Delete</a>
+					<a th:href="@{/editProduct(pid = ${product.pid})}" class="edit">Edit</a>
+					<a th:href="@{/deleteProduct(pid = ${product.pid})}" onClick="return confirm('Are you sure?')" class="delete">Delete</a>
 				</div>
 		
 			</span>
@@ -75,4 +83,5 @@
 	
 
 </body>
+
 </html>
