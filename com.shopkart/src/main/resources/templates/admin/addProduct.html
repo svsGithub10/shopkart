@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/styles.css" />
+<title>Administrator work</title>
+</head>
+<body>
+<nav class="navigation">
+	<h1> <span class="logo"><img src="/images/logo.png" alt="ShopKartlogo">Administrator</span></h1>
+	<div class="search-bar"></div>
+	<div class="nav-links">
+		
+		<a class="logout" href="/admin">logout</a>
+	</div>
+</nav>
+<div class="user-body">
+<div class="user-menu">
+	<div class="contain">
+		<a href="#" class="user"><img src="/images/profile.jpg" alt="profile" >
+		<p>Admin-ID</p></a>
+	
+		<div><a href="#"><i class="fa-solid fa-box-open"></i>All Orders</a></div>
+		<div><a href="#"><i class="fa-solid fa-user"></i>All Users</a></div>
+		<div><a href="#"><i class="fa-solid fa-bell"></i>Contact notification</a></div>
+		<div class="add-product">
+			<h2>Add new product here</h2>
+			<form action="/addProduct" method="post" enctype="multipart/form-data">
+				<input type="text" name="pname" placeholder="Product Name" required/> <br>
+				<input type="text" name="brand" placeholder="Brand" required/> <br>
+				<input type="text" name="price" placeholder="Price" required/> <br>
+			
+				<textarea name="pdescription" placeholder="Description" required></textarea><br>
+				<input type="file" name="pimage" class="addphoto" accept="image/*" /> <br>
+			
+				<button type="submit">Add</button>
+			</form>
+		</div>
+	</div>
+</div>
+<div class="container-p">
+		
+			<span class="product" th:each="product : ${allProducts}">
+			<div class="x">
+	    		<img class="pimg" th:if="${product.photoBase64}" th:src="'data:image/jpeg;base64,' + ${product.photoBase64}" 
+				alt="Something went wrong!">
+			
+				<div class="product-info">
+			
+					<div class="name">
+						<a href="#"><strong><span th:text="${product.brand}"></span></strong>
+						<span th:text="${product.pname}"></span></a>
+					</div>
+					<div class="price"><strong><span  th:text="@{'₹'+${product.price}}+'.00'"></span></strong></div>
+					<span th:text="${product.pdescription}"></span>
+				
+				</div>
+				</div>
+				
+				<div class="action-buttons">
+					<a href="#" class="edit">Edit</a>
+					<a href="#" class="delete">Delete</a>
+				</div>
+		
+			</span>
+		
+		
+		
+		
+</div>
+</div>
+	
+
+</body>
+</html>

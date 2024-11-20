@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/styles.css" />
+<title>ShopKart - Deal on!</title>
+</head>
+<body>
+
+<nav class="navigation">
+	<h1> <span class="logo"><img src="/images/logo.png" alt="ShopKartlogo">hopKart</span></h1>
+	<div class="search-bar"></div>
+	<div class="nav-links">
+		<a class="cart" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"> </i>Cart</a>
+		<a class="logout" href="/">logout</a>
+	</div>
+</nav>
+<div class="user-body">
+<div class="user-menu">
+	<div class="contain">
+		<a href="#" class="user"><img src="/images/profile.jpg" alt="profile" >
+		<p>User name</p></a>
+	
+		<div><a href="#"><i class="fa-solid fa-box"></i>My Orders</a></div>
+		<div><a href="#"><i class="fa-solid fa-file-contract"></i>Terms & Conditions</a></div>
+		<div><a href="#"><i class="fa fa-info-circle"></i>About Us</a></div>
+		<div><a href="#"><i class="fa fa-address-book"></i>Contact Us</a></div>
+	</div>
+</div>
+<div class="container">
+	<span class="product" th:each="product : ${allProducts}">
+	    <img class="pimg" th:if="${product.photoBase64}" th:src="'data:image/jpeg;base64,' + ${product.photoBase64}" 
+		alt="Something went wrong!">
+		<div class="product-info">
+			<div class="name">
+			<a href="#"><strong><span th:text="${product.brand}"></span></strong>
+			<span th:text="${product.pname}"></span></a></div>
+			<div class="price"><strong><span th:text="@{'₹'+${product.price}}+'.00'"></span></strong></div>
+			<span th:text="${product.pdescription}"></span>
+		</div>
+	</span>
+</div>
+</div>
+	
+</body>
+</html>
