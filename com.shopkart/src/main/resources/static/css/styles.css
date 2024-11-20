@@ -313,4 +313,83 @@ form {
 	 width: 75%;
 	 font-weight: 1000;
 	}
+
 }
+
+.order-container {
+	width: 75%;
+	background: #f1f1f1;
+	margin: 85px auto auto auto;
+	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+	display: flex;
+	flex-direction: column; 
+	.product{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: start;
+	}
+	.image-display{
+		display: flex;
+		align-items: center;
+		height: 400px;
+		margin-top: -30px;
+		
+	}
+	.opimg{
+		display: flex;
+		align-items: center;
+		padding: 0 25px;
+		width: 350px;
+	
+	}
+	.opimg:hover{
+		width: 400px;
+		padding: 0px;
+	}
+	
+	.name{
+		font-size: 25px;
+		.brand {font-size: 35px;}
+	}
+	
+	.price{
+		font-size: 32px;
+	}
+	
+	.spec{
+		font-size: 18px;
+	}
+	
+	.check-out{
+		display: flex;
+		margin-top: 20px;
+		padding: 20px;
+		width: 95%;
+		justify-content: end;
+		.add-to-cart{
+			margin: 5px 7px;
+			padding: 7px 10px;
+			border-radius: 5px;
+			border: solid 1.5px #101010;
+			cursor:pointer;
+		}
+		.add-to-cart:hover{
+			background: #101010;
+			color: #f1f1f1;
+		}
+
+		.buy-now{
+			margin:5px 7px;
+			padding: 7px 10px;
+			border-radius: 5px;
+			border: solid 1px #101010;
+			cursor:pointer;
+			background: #101010;
+			color: #f1f1f1;
+		}
+	}
+	
+}
+
+

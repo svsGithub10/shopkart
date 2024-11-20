@@ -25,17 +25,14 @@ public class ProductsController {
 	@Autowired
 	ProductsService service;
 	
-
-	
-	
 	@PostMapping("/addProduct")
 	public String addProduct( @RequestParam String pname,
 							  @RequestParam String brand,
 							  @RequestParam String price,
 							  @RequestParam String pdescription,
 							  @RequestParam("pimage") MultipartFile pimage,
-							  Model model,RedirectAttributes redirectAttributes,
-							  HttpSession session) {
+							  Model model,RedirectAttributes redirectAttributes
+							) {
 		try {
 		Products product=new Products();
 		product.setBrand(brand);
@@ -143,18 +140,19 @@ public class ProductsController {
 	
 	@GetMapping("/orderProduct")
 	public String orderProduct(@RequestParam long pid,
-							  Model model
+							  Model model, HttpSession session
 							  ) {
 		try {
 			Products product=service.findByPid(pid);
 			model.addAttribute("product", product);
+			
 		}
 		catch(Exception e) {
 			System.out.println("Exception: "+e.getMessage());
 			return "redirect:/home";
 		}
 		
-		return "/admin/orderProduct";
+		return "/orderProduct";
 	}
 
 	

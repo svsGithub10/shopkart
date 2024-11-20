@@ -7,15 +7,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
 import com.shopkart.entities.Products;
+import com.shopkart.entities.User;
 import com.shopkart.services.ProductsService;
+import com.shopkart.services.UserService;
+
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class NavigationController {
 	
 	@Autowired
 	ProductsService service;
+	
+	@Autowired
+	UserService userService;
 	
 
 	@GetMapping("/")
@@ -25,6 +31,7 @@ public class NavigationController {
 	
 	@GetMapping("/home")
 	public String home(Model model) {
+
 		List<Products> allProducts=service.fetchAllProducts();
 		model.addAttribute("allProducts", allProducts);
 		return "home";
