@@ -67,20 +67,21 @@
                     <label>Product Price: </label><input type="text" name="price" placeholder="Price" th:value="${product.price}" /> <br>
                     <label>Product Specs/Description: </label><textarea name="pdescription" class="specs" placeholder="Description" th:text="${product.pdescription}"></textarea><br>
                     <div class="displayphoto">
-                    <div>
-                                                
-                        <label>Left image: </label>
-                        <img class="pimg" th:if="${product.photo1Base64}"
-                            th:src="'data:image/jpeg;base64,' + ${product.photo1Base64}" alt="Something went wrong!">
-                              </div>
-                              <div>
+                                                  <div>
                     	<label>Main image: </label>
                         <img class="pimg" th:if="${product.photoBase64}"
                             th:src="'data:image/jpeg;base64,' + ${product.photoBase64}" alt="Something went wrong!">
                             </div>
+                    <div>
+                                                
+                        <label>Image 1: </label>
+                        <img class="pimg" th:if="${product.photo1Base64}"
+                            th:src="'data:image/jpeg;base64,' + ${product.photo1Base64}" alt="Something went wrong!">
+                              </div>
+
 
                             <div>
-						<label>Right image: </label>
+						<label>Image 2: </label>
                         <img class="pimg" th:if="${product.photo2Base64}"
                             th:src="'data:image/jpeg;base64,' + ${product.photo2Base64}" alt="Something went wrong!">
                             </div>

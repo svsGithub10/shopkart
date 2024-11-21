@@ -3,6 +3,7 @@ package com.shopkart.services;
 import java.util.List;
 
 import com.shopkart.entities.Products;
+import com.shopkart.entities.User;
 
 public interface ProductsService {
 	
@@ -15,5 +16,9 @@ public interface ProductsService {
 	public void updateProduct(Products product);
 
 	public void deleteProduct(Products product);
+	
+	String truncateToThreeLines(String description);
+
+	String toNewLines(String description);
 
 }

@@ -47,5 +47,11 @@ public class UserServiceImplementation implements UserService {
 		return repo.findByName(name);
 	}
 
+	@Override
+	public User getUserByEmail(String email) {
+		return repo.findByEmail(email);
+		
+	}
+
 	
 }

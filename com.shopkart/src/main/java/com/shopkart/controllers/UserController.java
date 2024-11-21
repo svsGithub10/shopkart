@@ -42,6 +42,8 @@ public class UserController {
 			Model model, HttpSession session)	{
 		boolean status = service.validateUser(email, password);
 		if(status == true) {
+			session.setAttribute("email", email);
+			model.addAttribute("session", session);
 			return "redirect:/home";
 		}
 		else {
@@ -49,4 +51,6 @@ public class UserController {
 			return "/validations/userNotFound";
 		}
 	}
+	
+	
 }

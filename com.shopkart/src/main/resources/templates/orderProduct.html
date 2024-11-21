@@ -22,7 +22,7 @@
 <div class="user-menu">
 	<div class="contain">
 		<a href="#" class="user"><img src="/images/profile.jpg" alt="profile" >
-		<p>User name</p></a>
+		<p><span th:text="${user.name}"></span></p></a>
 	
 		<div><a href="#"><i class="fa-solid fa-box"></i>My Orders</a></div>
 		<div><a href="#"><i class="fa-solid fa-file-contract"></i>Terms & Conditions</a></div>
@@ -33,19 +33,24 @@
 <div class="order-container">
 	<span class="product" th:each="product : ${product}">
 		<div class="image-display">
-			<img class="opimg" th:if="${product.photo1Base64}" th:src="'data:image/jpeg;base64,' + ${product.photo1Base64}" 
+		
+			<img class="opimg" th:if="${product.photoBase64}" th:src="'data:image/jpeg;base64,' + ${product.photoBase64}" 
 			alt="Something went wrong!">
-	    	<img class="opimg" th:if="${product.photoBase64}" th:src="'data:image/jpeg;base64,' + ${product.photoBase64}" 
+			
+			<div>
+			<img  th:if="${product.photo1Base64}" th:src="'data:image/jpeg;base64,' + ${product.photo1Base64}" 
 			alt="Something went wrong!">
-	    	<img class="opimg" th:if="${product.photo2Base64}" th:src="'data:image/jpeg;base64,' + ${product.photo2Base64}" 
+
+	    	<img  th:if="${product.photo2Base64}" th:src="'data:image/jpeg;base64,' + ${product.photo2Base64}" 
 			alt="Something went wrong!">
+			</div>
 		</div>
 		<div class="product-info">
 			<div class="name">
 			<strong class="brand"><span th:text="${product.brand}"></span></strong>
 			<span th:text="${product.pname}"></span></div>
 			<div class="price"><strong><span th:text="@{'₹'+${product.price}}+'.00'"></span></strong></div>
-			<span class="spec" th:text="${product.pdescription}"></span>
+			<span class="spec" th:utext="${#strings.replace(product.pdescription, '\n', '<br>')}"></span>
 		</div>
 
 			<div class="check-out">

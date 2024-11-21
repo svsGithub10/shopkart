@@ -22,7 +22,7 @@
 <div class="user-menu">
 	<div class="contain">
 		<a href="#" class="user"><img src="/images/profile.jpg" alt="profile" >
-		<p>User name</p></a>
+		<p><span th:text="${user.name}"></span></p></a>
 	
 		<div><a href="#"><i class="fa-solid fa-box"></i>My Orders</a></div>
 		<div><a href="#"><i class="fa-solid fa-file-contract"></i>Terms & Conditions</a></div>
@@ -39,7 +39,7 @@
 			<a th:href="@{/orderProduct(pid = ${product.pid})}"><strong><span th:text="${product.brand}"></span></strong>
 			<span th:text="${product.pname}"></span></a></div>
 			<div class="price"><strong><span th:text="@{'₹'+${product.price}}+'.00'"></span></strong></div>
-			<span th:text="${product.pdescription}"></span>
+			<span th:utext="${product.pdescription}"></span>
 		</div>
 	</span>
 </div>

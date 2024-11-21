@@ -63,7 +63,7 @@ alert('[[${errorMessage}]]');
 						<span th:text="${product.pname}"></span></a>
 					</div>
 					<div class="price"><strong><span  th:text="@{'₹'+${product.price}}+'.00'"></span></strong></div>
-					<span th:text="${product.pdescription}"></span>
+					<span class="spec" th:utext="${#strings.replace(product.pdescription, '\n', '<br>')}"></span>
 				
 				</div>
 				</div>

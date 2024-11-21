@@ -136,7 +136,8 @@ h1 img{
 	height: 250px;
 	min-width: 300px;
 	border-radius: 10px;
-	object-fit: cover;
+	object-fit: contain;
+	mix-blend-mode: multiply;
 }
 
 .price{
@@ -189,7 +190,8 @@ display: flex;
 	height: 250px;
 	min-width: 300px;
 	border-radius: 10px;
-	object-fit: cover;
+	object-fit: contain;
+	mix-blend-mode: multiply;
 }
 
 .price{
@@ -326,26 +328,31 @@ form {
 	.product{
 		display: flex;
 		flex-direction: column;
-		align-items: center;
 		justify-content: start;
 	}
 	.image-display{
 		display: flex;
 		align-items: center;
-		height: 400px;
+		height: 500px;
+		padding: 50px 0;
 		margin-top: -30px;
-		
-	}
-	.opimg{
-		display: flex;
-		align-items: center;
-		padding: 0 25px;
-		width: 350px;
-	
-	}
-	.opimg:hover{
+		.opimg{
+			width: 600px;
+			height: 500px;
+			padding: 10px;
+			object-fit: contain;
+			mix-blend-mode: multiply;
+		}
+		div{
+		width: 50%;
+		img{
 		width: 400px;
-		padding: 0px;
+		height: 250px;
+		padding: 10px;
+		object-fit: contain;
+		mix-blend-mode: multiply;
+		}
+		}
 	}
 	
 	.name{
@@ -389,7 +396,7 @@ form {
 			color: #f1f1f1;
 		}
 	}
-	
+
 }
 
 

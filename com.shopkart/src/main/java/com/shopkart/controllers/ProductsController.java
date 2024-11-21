@@ -14,7 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shopkart.entities.Products;
-
+import com.shopkart.entities.User;
 import com.shopkart.services.ProductsService;
 
 import jakarta.servlet.http.HttpSession;
@@ -138,22 +138,7 @@ public class ProductsController {
 		return "redirect:/addProduct";
 	}
 	
-	@GetMapping("/orderProduct")
-	public String orderProduct(@RequestParam long pid,
-							  Model model, HttpSession session
-							  ) {
-		try {
-			Products product=service.findByPid(pid);
-			model.addAttribute("product", product);
-			
-		}
-		catch(Exception e) {
-			System.out.println("Exception: "+e.getMessage());
-			return "redirect:/home";
-		}
-		
-		return "/orderProduct";
-	}
+
 
 	
 }

@@ -12,5 +12,7 @@ public interface UserService {
 	boolean validateUser(String email, String password);
 
 	User getUser(String name);
+
+	User getUserByEmail(String email);
 	
 }
