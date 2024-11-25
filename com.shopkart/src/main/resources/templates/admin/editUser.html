@@ -17,14 +17,14 @@
         </h1>
         <div class="search-bar"></div>
         <div class="nav-links">
-            <a class="logout" href="/admin">logout</a>
+            <a class="logout" href="/logout">logout</a>
         </div>
     </nav>
     <div class="user-body">
         <div class="user-menu">
             <div class="contain">
                 <a href="#" class="user"><img src="/images/profile.jpg" alt="profile">
-                    <p>Admin-ID</p>
+                    <p><span th:text="${admin.adminId}"></span></p>
                 </a>
                 <div><a href="/addProduct"><i class="fa-solid fa-bookmark"></i>All Products</a></div>
                 <div>

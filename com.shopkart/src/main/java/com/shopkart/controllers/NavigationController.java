@@ -8,9 +8,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.shopkart.entities.Admin;
 import com.shopkart.entities.Products;
 import com.shopkart.entities.User;
+import com.shopkart.services.AdminService;
 import com.shopkart.services.ProductsService;
 import com.shopkart.services.UserService;
 
@@ -20,10 +23,13 @@ import jakarta.servlet.http.HttpSession;
 public class NavigationController {
 	
 	@Autowired
-	ProductsService service;
+	ProductsService productService;
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired
+	AdminService adminService;
 
 	@GetMapping("/")
 	public String index() {
@@ -44,10 +50,10 @@ public class NavigationController {
 		User user=userService.getUserByEmail(email);
 		model.addAttribute("user", user);
 		
-		List<Products> allProducts=service.fetchAllProducts();
+		List<Products> allProducts=productService.fetchAllProducts();
 		
 	    for (Products product : allProducts) {
-	        product.setPdescription(service.truncateToThreeLines(product.getPdescription()));
+	        product.setPdescription(productService.truncateToThreeLines(product.getPdescription()));
 	    }
 		
 		model.addAttribute("allProducts", allProducts);
@@ -70,11 +76,16 @@ public class NavigationController {
 	}
 	
 	@GetMapping("/addProduct")
-	public String addProduct(Model model, HttpSession http) {
-		List<Products> allProducts=service.fetchAllProducts();
+	public String addProduct(Model model, HttpSession session) {
+		
+		String adminId=(String) session.getAttribute("adminId");
+		Admin admin = adminService.getAdminId(adminId);
+		model.addAttribute("admin", admin);
+		
+		List<Products> allProducts=productService.fetchAllProducts();
 		
 	    for (Products product : allProducts) {
-	        product.setPdescription(service.toNewLines(product.getPdescription()));
+	        product.setPdescription(productService.toNewLines(product.getPdescription()));
 	    }
 		
 		model.addAttribute("allProducts", allProducts);
@@ -91,8 +102,8 @@ public class NavigationController {
 			User user=userService.getUserByEmail(email);
 			model.addAttribute("user", user);
 			
-			Products product=service.findByPid(pid);
-		    product.setPdescription(service.toNewLines(product.getPdescription()));
+			Products product=productService.findByPid(pid);
+		    product.setPdescription(productService.toNewLines(product.getPdescription()));
 			model.addAttribute("product", product);
 			
 		}
@@ -102,6 +113,40 @@ public class NavigationController {
 		}
 		
 		return "/orderProduct";
+	}
+	
+	@GetMapping("/editProduct")
+	public String editProduct(@RequestParam long pid,
+							  Model model, HttpSession session
+							  ) {
+		try {
+			String adminId=(String) session.getAttribute("adminId");
+			Admin admin = adminService.getAdminId(adminId);
+			model.addAttribute("admin", admin);
+			
+			Products product=productService.findByPid(pid);
+			model.addAttribute("product", product);
+		}
+		catch(Exception e) {
+			System.out.println("Exception: "+e.getMessage());
+			return "redirect:/addProduct";
+		}
+		
+		return "/admin/editProduct";
+	}
+	
+	@GetMapping("/deleteProduct")
+	public String deleteProduct(@RequestParam long pid,HttpSession session, RedirectAttributes redirectAttributes) {
+		try {		
+			Products product=productService.findByPid(pid);
+			productService.deleteProduct(product);
+			redirectAttributes.addFlashAttribute("successMessage", "Product deleted successfully!");
+		}
+		catch(Exception e) {
+			redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete product: " + e.getMessage());
+			return "redirect:/addProduct";
+		}
+		return "redirect:/addProduct";
 	}
 	
 	@GetMapping("/userProfile")
@@ -124,6 +169,11 @@ public class NavigationController {
 	
 	@GetMapping("/allUsers")
 	public String allUsers(Model model, HttpSession session) {
+		
+		String adminId=(String) session.getAttribute("adminId");
+		Admin admin = adminService.getAdminId(adminId);
+		model.addAttribute("admin", admin);
+		
 		List<User> allUsers=userService.fetchAllUsers();
 		model.addAttribute("allUsers", allUsers);
 		return "/admin/allUsers";
@@ -131,14 +181,26 @@ public class NavigationController {
 	
 	@GetMapping("/editUser")
 	public String editUser(@RequestParam long id,Model model, HttpSession session) {
+		
+		String adminId=(String) session.getAttribute("adminId");
+		Admin admin = adminService.getAdminId(adminId);
+		model.addAttribute("admin", admin);
+		
 		User user=userService.findById(id);
 		model.addAttribute("user", user);
 		return "/admin/editUser";
 	}
 
 	@GetMapping("/deleteUser")
-	public String deleteUser(@RequestParam long id,Model model, HttpSession session) {
+	public String deleteUser(@RequestParam long id,Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+		try {
 		userService.deleteUser(id);
+		redirectAttributes.addFlashAttribute("successMessage", "User deleted successfully!");
+	}
+	catch(Exception e) {
+		redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete user: " + e.getMessage());
+		return "redirect:/allUsers";
+	}
 		return "redirect:/allUsers";
 	}
 }

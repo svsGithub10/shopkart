@@ -9,4 +9,6 @@ public interface AdminService {
 	boolean adminExists(String adminId, String secretCode);
 
 	boolean validateAdmin(String adminId, String password);
+
+	Admin getAdminId(String adminId);
 }

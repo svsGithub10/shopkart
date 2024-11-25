@@ -55,23 +55,6 @@ public class ProductsController {
 		return "redirect:/addProduct";
 	}
 	
-
-	@GetMapping("/editProduct")
-	public String editProduct(@RequestParam long pid,
-							  Model model, HttpSession session
-							  ) {
-		try {
-			Products product=service.findByPid(pid);
-			model.addAttribute("product", product);
-		}
-		catch(Exception e) {
-			System.out.println("Exception: "+e.getMessage());
-			return "redirect:/addProduct";
-		}
-		
-		return "/admin/editProduct";
-	}
-	
 	@PostMapping("/editProduct")
 	public String updateProduct(@RequestParam(required = false) long pid, 
 			@RequestParam(required = false) String pname,
@@ -123,22 +106,5 @@ public class ProductsController {
 		}
 		return "redirect:/addProduct";
 	}
-	
-	@GetMapping("/deleteProduct")
-	public String deleteProduct(@RequestParam long pid,HttpSession session, RedirectAttributes redirectAttributes) {
-		try {
-			Products product=service.findByPid(pid);
-			service.deleteProduct(product);
-			redirectAttributes.addFlashAttribute("successMessage", "Product deleted successfully!");
-		}
-		catch(Exception e) {
-			redirectAttributes.addFlashAttribute("errorMessage", "Failed to delete product: " + e.getMessage());
-			return "redirect:/addProduct";
-		}
-		return "redirect:/addProduct";
-	}
-	
-
-
 	
 }

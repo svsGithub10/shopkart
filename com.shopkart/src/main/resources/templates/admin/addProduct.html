@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/styles.css" />
-<title>Administrator work</title>
+<title>Administrator work - add product</title>
 </head>
 <body>
 <nav class="navigation">
@@ -14,7 +14,7 @@
 	<div class="search-bar"></div>
 	<div class="nav-links">
 		
-		<a class="logout" href="/admin">logout</a>
+		<a class="logout" href="/logout">logout</a>
 	</div>
 </nav>
 <script th:if="${successMessage}" th:inline="javascript">
@@ -27,7 +27,7 @@ alert('[[${errorMessage}]]');
 <div class="user-menu">
 	<div class="contain">
 		<a href="#" class="user"><img src="/images/profile.jpg" alt="profile" >
-		<p>Admin-ID</p></a>
+		<p><span th:text="${admin.adminId}"></span></p></a>
 		<div><a href="/addProduct"><i class="fa-solid fa-bookmark"></i>All Products</a></div>
 		<div><a href="#"><i class="fa-solid fa-box-open"></i>All Orders</a></div>
 		<div><a href="/allUsers"><i class="fa-solid fa-user"></i>All Users</a></div>

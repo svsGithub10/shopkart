@@ -42,4 +42,10 @@ public class AdminServiceImplementation implements AdminService{
 		
 	}
 
+	@Override
+	public Admin getAdminId(String adminId) {
+		// TODO Auto-generated method stub
+		return repo.findByAdminId(adminId);
+	}
+
 }
