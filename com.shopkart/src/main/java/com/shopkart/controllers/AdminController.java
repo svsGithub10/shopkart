@@ -13,6 +13,8 @@ import com.shopkart.entities.Admin;
 
 import com.shopkart.services.AdminService;
 
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class AdminController {
@@ -37,11 +39,12 @@ public class AdminController {
 	
 	@PostMapping("/adminLogin")
 	public String login(@RequestParam String adminId,
-			@RequestParam String password,
-			
+			@RequestParam String password, HttpSession session,
 			Model model)	{
 		boolean status = service.validateAdmin(adminId, password);
 		if(status == true) {
+			session.setAttribute("adminId", adminId);
+			model.addAttribute("session", session);
 			return "redirect:/addProduct";
 		}
 		else {

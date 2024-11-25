@@ -1,5 +1,7 @@
 package com.shopkart.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -51,6 +53,30 @@ public class UserServiceImplementation implements UserService {
 	public User getUserByEmail(String email) {
 		return repo.findByEmail(email);
 		
+	}
+
+	@Override
+	public void updateUser(User user) {
+		repo.save(user);
+		
+	}
+
+	@Override
+	public List<User> fetchAllUsers() {
+		// TODO Auto-generated method stub
+		return repo.findAll();
+	}
+
+	@Override
+	public User findById(long id) {
+		// TODO Auto-generated method stub
+		return repo.findById(id);
+	}
+
+	@Override
+	public User deleteUser(long id) {
+		// TODO Auto-generated method stub
+		return repo.deleteById(id);
 	}
 
 	

@@ -14,18 +14,19 @@
 	<h1> <span class="logo"><img src="/images/logo.png" alt="ShopKartlogo">hopKart</span></h1>
 	<div class="search-bar"></div>
 	<div class="nav-links">
-	
 		<a class="cart" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"> </i>Cart</a>
 		<a class="logout" href="/">logout</a>
 	</div>
 </nav>
-
+    <script th:if="${successMessage}" th:inline="javascript">
+        alert('[[${successMessage}]]');
+    </script>
+    <script th:if="${errorMessage}" th:inline="javascript">
+        alert('[[${errorMessage}]]');
+    </script>
 <div class="user-body">
-
 <div class="user-menu">
-	
 	<div class="contain">
-		
 		<a href="/userProfile" class="user"><img th:if="${user.photoBase64}" th:src="'data:image/jpeg;base64,' + ${user.photoBase64}" 
 			alt="profile" >
 		<p><span th:text="${user.name}"></span></p></a>
@@ -36,37 +37,36 @@
 		<div><a href="#"><i class="fa fa-address-book"></i>Contact Us</a></div>
 	</div>
 </div>
-<div class="order-container">
-
-	<span class="product" th:each="product : ${product}">
-		<div class="image-display">
-		
-			<img class="opimg" th:if="${product.photoBase64}" th:src="'data:image/jpeg;base64,' + ${product.photoBase64}" 
-			alt="Something went wrong!">
-			
+	<div class="container">
+	
+		<div class="profile">
+		<h1>Your Profile</h1>
+		<div class="profile-photo"><img th:if="${user.photoBase64}" th:src="'data:image/jpeg;base64,' + ${user.photoBase64}" 
+			alt="profile" ></div>
+		<div class="profile-info">
 			<div>
-			<img  th:if="${product.photo1Base64}" th:src="'data:image/jpeg;base64,' + ${product.photo1Base64}" 
-			alt="Something went wrong!">
-
-	    	<img  th:if="${product.photo2Base64}" th:src="'data:image/jpeg;base64,' + ${product.photo2Base64}" 
-			alt="Something went wrong!">
+				<p><strong>Name:</strong> <span th:text="${user.name}"></span></p>
+				<p><strong>E-mail:</strong> <span th:text="${user.email}"></span></p>
+			</div>
+			<div>
+				<p><strong>Mobile number:</strong> <span th:text="${user.phone}"></span></p>
+				<p><strong>Date of Birth:</strong> <span th:text="${user.dob}"></span></p>
 			</div>
 		</div>
-		<div class="product-info">
-			<div class="name">
-			<strong class="brand"><span th:text="${product.brand}"></span></strong>
-			<span th:text="${product.pname}"></span></div>
-			<div class="price"><strong><span th:text="@{'₹'+${product.price}}+'.00'"></span></strong></div>
-			<span class="spec" th:utext="${#strings.replace(product.pdescription, '\n', '<br>')}"></span>
-		</div>
-
-			<div class="check-out">
-				<a class="add-to-cart"><i class="fa fa-shopping-cart" aria-hidden="true"> </i>Add to Cart</a>
-				<a class="buy-now">Buy now</a>
+		<div class="profile-address">
+			<h2>Address</h2>
+			<div>
+				<p><strong>State:</strong> <span th:text="${user.state}"></span></p>
+				<p><strong>City:</strong> <span th:text="${user.city}"></span></p>
+				<p><strong>Pin Code:</strong> <span th:text="${user.pinCode}"></span></p>
 			</div>
+			<p><strong>Area:</strong> <span th:text="${user.address1}+', '+${user.address2}"></span></p>
+			<div class="space"></div>
+			<a class="accept-but" href="/editProfile">Edit Profile</a>
+		</div>
+		</div>
 		
-	</span>
-</div>
+	</div>
 </div>
 	
 </body>

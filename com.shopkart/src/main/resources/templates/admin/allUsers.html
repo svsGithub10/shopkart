@@ -50,46 +50,33 @@
                 </div>
             </div>
         </div>
-        <div class="container-p">
-            <div class="update-product">
-                <h2>Update product</h2>
-                <form action="/editProduct" method="post" enctype="multipart/form-data">
-                	
-                    <label>Product ID:</label>  <input readonly th:value="${product.pid}" name="pid" /> <br>
-                   
-                    <label>Product Name: </label> <input type="text" name="pname" placeholder="Product Name" th:value="${product.pname}" /> <br>
-                    <label>Product Brand: </label><input type="text" name="brand" placeholder="Brand" th:value="${product.brand}" /> <br>
-                    <label>Product Price: </label><input type="text" name="price" placeholder="Price" th:value="${product.price}" /> <br>
-                    <label>Product Specs/Description: </label><textarea name="pdescription" class="specs" placeholder="Description" th:text="${product.pdescription}"></textarea><br>
-                    <div class="displayphoto">
-                                                  <div>
-                    	<label>Main image: </label>
-                        <img class="pimg" th:if="${product.photoBase64}"
-                            th:src="'data:image/jpeg;base64,' + ${product.photoBase64}" alt="Something went wrong!">
-                            </div>
-                    <div>
-                                                
-                        <label>Image 1: </label>
-                        <img class="pimg" th:if="${product.photo1Base64}"
-                            th:src="'data:image/jpeg;base64,' + ${product.photo1Base64}" alt="Something went wrong!">
-                              </div>
-
-
-                            <div>
-						<label>Image 2: </label>
-                        <img class="pimg" th:if="${product.photo2Base64}"
-                            th:src="'data:image/jpeg;base64,' + ${product.photo2Base64}" alt="Something went wrong!">
-                            </div>
-                    </div>
-                    <div class="addphoto">
-                        <input type="file" name="pimage" accept="image/*" />
-                        <input type="file" name="image1" accept="image/*" />
-
-                        <input type="file" name="image2" accept="image/*" />
-                    </div>
-                    <br>
-                    <button type="submit">Update</button><br><br>
-                </form>
+        <div class="container">
+            <div class="update-user-from-admin">
+                
+                <table>
+                <thead>
+                <tr>
+                	<th>ID</th>
+                	<th>E-mail</th>
+                	<th>Name</th>
+                	<th>Mobile No</th>
+                	<th>City</th>
+                	<th></th>
+                	<th></th>
+                </tr>
+				</thead>
+				<tbody >
+				<tr th:each="user : ${allUsers}">
+					<td th:text="${user.id}"></td>
+					<td th:text="${user.email}"></td>
+					<td th:text="${user.name}"></td>
+					<td th:text="${user.phone}"></td>
+					<td th:text="${user.city}"></td>
+					<td ><a th:href="@{/editUser(id = ${user.id})}" class="edit">Edit</a></td>
+					<td ><a th:href="@{/deleteUser(id = ${user.id})}" onClick="return confirm('Are you sure?')" class="delete">Delete</a></td>
+				</tr>
+				</tbody>
+				</table>
             </div>
         </div>
     </div>

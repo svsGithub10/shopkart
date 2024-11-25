@@ -1,5 +1,7 @@
 package com.shopkart.services;
 
+import java.util.List;
+
 import com.shopkart.entities.User;
 
 
@@ -14,5 +16,13 @@ public interface UserService {
 	User getUser(String name);
 
 	User getUserByEmail(String email);
+
+	void updateUser(User user);
+	
+	List<User> fetchAllUsers();
+
+	User findById(long id);
+	
+	User deleteUser(long id);
 	
 }

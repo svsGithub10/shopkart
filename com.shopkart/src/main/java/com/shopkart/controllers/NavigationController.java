@@ -24,14 +24,18 @@ public class NavigationController {
 	
 	@Autowired
 	UserService userService;
-	
 
 	@GetMapping("/")
 	public String index() {
+		
 		return "index";
 	}
 	
-
+	@GetMapping("/logout")
+	public String logout(HttpSession session) {
+		session.invalidate();
+		return "redirect:/";
+	}
 	
 	@GetMapping("/home")
 	public String home(Model model, HttpSession session) {
@@ -50,8 +54,6 @@ public class NavigationController {
 		return "home";
 	}
 	
-	
-	
 	@GetMapping("/success")
 	public String success() {
 		return "redirect:/";
@@ -63,12 +65,12 @@ public class NavigationController {
 	}
 	
 	@GetMapping("/admin")
-	public String admin(Model model) {
+	public String admin() {
 		return "/admin/admin";
 	}
 	
 	@GetMapping("/addProduct")
-	public String addProduct(Model model) {
+	public String addProduct(Model model, HttpSession http) {
 		List<Products> allProducts=service.fetchAllProducts();
 		
 	    for (Products product : allProducts) {
@@ -102,5 +104,41 @@ public class NavigationController {
 		return "/orderProduct";
 	}
 	
+	@GetMapping("/userProfile")
+	public String userProfile(Model model, HttpSession session) {
+		String email=(String) session.getAttribute("email");
+		User user=userService.getUserByEmail(email);
+		model.addAttribute("user", user);
+		
+		return "userProfile";
+	}
+	
+	@GetMapping("/editProfile")
+	public String editProfile(Model model, HttpSession session) {
+		String email=(String) session.getAttribute("email");
+		User user=userService.getUserByEmail(email);
+		model.addAttribute("user", user);
+		
+		return "editProfile";
+	}
+	
+	@GetMapping("/allUsers")
+	public String allUsers(Model model, HttpSession session) {
+		List<User> allUsers=userService.fetchAllUsers();
+		model.addAttribute("allUsers", allUsers);
+		return "/admin/allUsers";
+	}
+	
+	@GetMapping("/editUser")
+	public String editUser(@RequestParam long id,Model model, HttpSession session) {
+		User user=userService.findById(id);
+		model.addAttribute("user", user);
+		return "/admin/editUser";
+	}
 
+	@GetMapping("/deleteUser")
+	public String deleteUser(@RequestParam long id,Model model, HttpSession session) {
+		userService.deleteUser(id);
+		return "redirect:/allUsers";
+	}
 }

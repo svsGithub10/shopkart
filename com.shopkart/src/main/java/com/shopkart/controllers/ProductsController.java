@@ -31,7 +31,7 @@ public class ProductsController {
 							  @RequestParam String price,
 							  @RequestParam String pdescription,
 							  @RequestParam("pimage") MultipartFile pimage,
-							  Model model,RedirectAttributes redirectAttributes
+							  Model model,HttpSession session,RedirectAttributes redirectAttributes
 							) {
 		try {
 		Products product=new Products();
@@ -58,7 +58,7 @@ public class ProductsController {
 
 	@GetMapping("/editProduct")
 	public String editProduct(@RequestParam long pid,
-							  Model model
+							  Model model, HttpSession session
 							  ) {
 		try {
 			Products product=service.findByPid(pid);
@@ -81,7 +81,7 @@ public class ProductsController {
 			@RequestParam(required = false) MultipartFile pimage, 
 			@RequestParam(required = false) MultipartFile image1, 
 			@RequestParam(required = false) MultipartFile image2,
-			Model model, RedirectAttributes redirectAttributes) {
+			Model model,HttpSession session, RedirectAttributes redirectAttributes) {
 		try {
 			Products product=service.findByPid(pid);
 			if (pname != null && !pname.isEmpty()) product.setPname(pname);
@@ -125,7 +125,7 @@ public class ProductsController {
 	}
 	
 	@GetMapping("/deleteProduct")
-	public String deleteProduct(@RequestParam long pid, RedirectAttributes redirectAttributes) {
+	public String deleteProduct(@RequestParam long pid,HttpSession session, RedirectAttributes redirectAttributes) {
 		try {
 			Products product=service.findByPid(pid);
 			service.deleteProduct(product);

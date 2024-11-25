@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/styles.css" />
+    <title>Administrator work - edit user</title>
+</head>
+
+<body>
+    <nav class="navigation">
+        <h1>
+            <span class="logo"><img src="/images/logo.png" alt="ShopKartlogo">Administrator</span>
+        </h1>
+        <div class="search-bar"></div>
+        <div class="nav-links">
+            <a class="logout" href="/admin">logout</a>
+        </div>
+    </nav>
+    <div class="user-body">
+        <div class="user-menu">
+            <div class="contain">
+                <a href="#" class="user"><img src="/images/profile.jpg" alt="profile">
+                    <p>Admin-ID</p>
+                </a>
+                <div><a href="/addProduct"><i class="fa-solid fa-bookmark"></i>All Products</a></div>
+                <div>
+                    <a href="#"><i class="fa-solid fa-box-open"></i>All Orders</a>
+                </div>
+                <div>
+                    <a href="/allUsers"><i class="fa-solid fa-user"></i>All Users</a>
+                </div>
+                <div>
+                    <a href="#"><i class="fa-solid fa-bell"></i>Contact
+                        notification</a>
+                </div>
+                <div class="add-product">
+                    <h2>Add new product here</h2>
+                    <form action="/addProduct" method="post" enctype="multipart/form-data">
+                        <input type="text" name="pname" placeholder="Product Name" required /> <br>
+                        <input type="text" name="brand" placeholder="Brand" required /> <br> 
+                        <input type="text" name="price" placeholder="Price" required /> <br>
+                        <textarea name="pdescription" placeholder="Description" required></textarea>
+                        <br> <input type="file" name="pimage" class="addphoto" accept="image/*" /> <br>
+                        <button type="submit">Add</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+	<div class="container">
+		<form class="profile" action="/editUser" method="post" enctype="multipart/form-data">
+		<h1>Update User Profile</h1>
+		<div class="profile-photo">
+			<img th:if="${user.photoBase64}" th:src="'data:image/jpeg;base64,' + ${user.photoBase64}" alt="profile"> <br>
+			<input type="file" name="photo" class="addphoto" accept="image/*" /> <br>
+				<select class="gender" id="gender" name="gender" style="text-transform: uppercase;" >
+					<option ><span th:text="${user.gender}"></span></option>
+					<option value="male">Male</option>
+					<option value="female">Female</option>
+					<option value="other">Other</option>
+				</select>
+		</div>
+		<div class="profile-info-edit">
+			<div>
+				<p><strong>Name:</strong> <input type="text" name="name" th:value="${user.name}" placeholder="Username"></p>
+				<p><strong>E-mail:</strong> <input type="text" name="email" th:value="${user.email}" placeholder="E-mail"></p>
+				<p><strong>Password:</strong> <input type="text" name="password" th:value="${user.password}" placeholder="Password"></p>
+			</div>
+			<div>
+				<p><strong>Mobile number:</strong> <input type="text" name="phone" th:value="${user.phone}" placeholder="Mobile number"></p>
+				<p><strong>Date of Birth: </strong><input type="date" name="dob" th:value="${user.dob}" ></p>
+
+			</div>
+		</div>
+		<div class="profile-address">
+			<h2>Address</h2>
+			<div>
+				<p><strong>State:</strong> <input type="text" name="state" th:value="${user.state}" placeholder="State"></p>
+				<p><strong>City:</strong> <input type="text" name="city" th:value="${user.city}" placeholder="City"></p>
+				<p><strong class="l">Pin Code:</strong> <input type="text" name="pinCode" th:value="${user.pinCode}" placeholder="Pin Code"></p>
+			</div>
+			<div>
+				<p><strong class="xl">Address line 1:</strong> <input type="text" name="address1" th:value="${user.address1}" placeholder="Address Line 1"></p>
+				<p><strong class="xl">Address line 2:</strong> <input type="text" name="address2" th:value="${user.address2}" placeholder="Address Line 2"></p>
+			</div>
+		</div>
+		
+		<button  type="submit">Update</button>
+		<a class="accept-but" href="/allUsers">Cancel</a>
+		</form>
+	</div>
+        </div>
+    </div>
+</body>
+
+</html>

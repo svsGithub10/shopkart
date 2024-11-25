@@ -23,6 +23,7 @@ public class User {
 	private String email;
 	private String password;
 	private String dob;
+	private String gender;
 	private String pinCode;
 	private String phone;
 	private String state;
@@ -47,7 +48,7 @@ public class User {
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(Long id, String name, String email, String password, String dob, String pinCode, String phone,
+	public User(Long id, String name, String email, String password, String dob, String gender, String pinCode, String phone,
 			String state, String city, String address1, String address2, byte[] photo) {
 		super();
 		this.id = id;
@@ -55,6 +56,7 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.dob = dob;
+		this.gender = gender;
 		this.pinCode = pinCode;
 		this.phone = phone;
 		this.state = state;
@@ -102,6 +104,14 @@ public class User {
 
 	public void setDob(String dob) {
 		this.dob = dob;
+	}
+
+	public String getGender() {
+		return gender;
+	}
+
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
 
 	public String getPinCode() {
@@ -163,8 +173,11 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", dob=" + dob
-				+ ", pinCode=" + pinCode + ", phone=" + phone + ", state=" + state + ", city=" + city + ", address1="
-				+ address1 + ", address2=" + address2 + ", photo=" + Arrays.toString(photo) + "]";
+				+ ", gender=" + gender + ", pinCode=" + pinCode + ", phone=" + phone + ", state=" + state + ", city="
+				+ city + ", address1=" + address1 + ", address2=" + address2 + ", photo=" + Arrays.toString(photo)
+				+ "]";
 	}
 
+
+	
 }

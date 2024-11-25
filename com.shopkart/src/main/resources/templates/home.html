@@ -15,15 +15,17 @@
 	<div class="search-bar"></div>
 	<div class="nav-links">
 		<a class="cart" href="#"><i class="fa fa-shopping-cart" aria-hidden="true"> </i>Cart</a>
-		<a class="logout" href="/">logout</a>
+		<a class="logout" href="/logout">logout</a>
 	</div>
 </nav>
+
 <div class="user-body">
 <div class="user-menu">
 	<div class="contain">
-		<a href="#" class="user"><img src="/images/profile.jpg" alt="profile" >
+		<a href="/userProfile" class="user"><img th:if="${user.photoBase64}" th:src="'data:image/jpeg;base64,' + ${user.photoBase64}" 
+			alt="profile" >
 		<p><span th:text="${user.name}"></span></p></a>
-	
+		<div><a href="/home"><i class="fa fa-home"></i>Home</a></div>
 		<div><a href="#"><i class="fa-solid fa-box"></i>My Orders</a></div>
 		<div><a href="#"><i class="fa-solid fa-file-contract"></i>Terms & Conditions</a></div>
 		<div><a href="#"><i class="fa fa-info-circle"></i>About Us</a></div>
