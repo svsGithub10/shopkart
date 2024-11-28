@@ -221,6 +221,14 @@ public class NavigationController {
 		return "/verifyOtp";
 	}
 
+	@GetMapping("/changePassword")
+	public String changePassword(Model model, HttpSession session) {
+		String email=(String) session.getAttribute("email");
+		User user=userService.getUserByEmail(email);
+		model.addAttribute("user", user);
+		return "changePassword";
+	}
+
 }
 	
 

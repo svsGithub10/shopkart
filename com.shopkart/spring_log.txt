@@ -1,0 +1,11 @@
+[INFO] Scanning for projects...
+[INFO] 
+[INFO] ----------------------< e-commerce:com.shopkart >-----------------------
+[INFO] Building com.shopkart 0.0.1-SNAPSHOT
+[INFO]   from pom.xml
+[INFO] --------------------------------[ jar ]---------------------------------
+[INFO] 
+[INFO] >>> spring-boot:3.3.1:run (default-cli) > test-compile @ com.shopkart >>>
+[INFO] 
+[INFO] --- resources:3.3.1:resources (default-resources) @ com.shopkart ---
+[INFO] Copying 1 resource from src\main\resources to target\classes

@@ -646,6 +646,12 @@ table{
     		background: #101010;
 			color: #f1f1f1;
     	}
+.password-change{
+	
+	input{
+		width: 150px;
 
+	}
+}
 
 

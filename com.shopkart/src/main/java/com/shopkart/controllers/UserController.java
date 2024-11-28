@@ -165,7 +165,31 @@ public class UserController {
 		return "redirect:/allUsers";
 	}
 	
-
+	@PostMapping("/changePassword")
+	public String changePassword(@RequestParam String password, @RequestParam String newPassword,
+			Model model,HttpSession session,RedirectAttributes redirectAttributes) {
+			String email=(String) session.getAttribute("email");
+			try {
+			User user=service.getUserByEmail(email);
+			String oldPassword=verify.decrypt(user.getPassword(), email);
+			if(!password.isEmpty() && oldPassword.equals(password)) {
+				user.setPassword(verify.encrypt(newPassword, email));
+				service.updateUser(user);
+				model.addAttribute("user",user);
+				redirectAttributes.addFlashAttribute("successMessage", "Password Changed successfully!");
+				return "redirect:/editProfile";
+			}
+			else {
+				redirectAttributes.addFlashAttribute("successMessage", "Current password is incorrect!");
+				return "redirect:/changePassword";
+			}
+			}
+			catch(Exception e) {
+				redirectAttributes.addFlashAttribute("errorMessage", "Failed to change password: " + e.getMessage());
+				return "redirect:/changePassword";
+			}
+			
+	}
 	
 	
 	
