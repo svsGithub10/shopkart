@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <style>
     	.danger::placeholder{
     		color: red;
@@ -20,25 +21,31 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form action="/addAdmin" method="post">
+            <form action="/addAdmin" method="post" id="verify1">
                 <h1>Register yourself <br/> <span class="logo"><img src="/images/logo.png" alt="ShopKartlogo">hopKart ADMIN</span></h1>
                 <div class="social-icons"></div>
                 <input type="text" placeholder="Enter 5 digit ID" name="adminId" required>
                 <input type="password" placeholder="Password" name="password" required>
                 <!-- <p class="caution">Please enter the server secret code below</p> -->
                 <input class="danger" type="password" placeholder="Please enter the server secret code here" name="secretCode" required>
-                <button type="submit">Sign Up as Admin</button>
+                <button class="g-recaptcha" 
+       		data-sitekey="6LdPookqAAAAAMJH95JZli0a4BE_oSwdecWvjuFE" 
+        	data-callback='onSubmit1' 
+        	data-action='submit'>Sign up as admin</button>
             </form>
         </div>
         <div class="form-container sign-in">
-            <form action="/adminLogin" method="post">
+            <form action="/adminLogin" method="post" id="verify2">
                 
                 <h1>Credentials here<br/> <span class="logo"><img src="/images/logo.png" alt="ShopKartlogo">hopKart ADMIN</span> </h1>
 				<div class="social-icons"></div>
                 <input type="text" placeholder="Admin ID" name="adminId" required>
                 <input type="password" placeholder="Password" name="password" required>
             
-                <button type="submit">Get Access</button>
+                <button class="g-recaptcha"
+       		data-sitekey="6LdPookqAAAAAMJH95JZli0a4BE_oSwdecWvjuFE" 
+        	data-callback='onSubmit2' 
+        	data-action='submit'>Get access</button>
             </form>
         </div>
         <div class="toggle-container">
@@ -58,6 +65,15 @@
         </div>
     </div>
     <script src="/script/script.js"></script>
+        <script>
+   		function onSubmit1(token) {
+     		document.getElementById("verify1").submit();
+   		}
+   		function onSubmit2(token) {
+     		document.getElementById("verify2").submit();
+   		}
+ 	</script>
+
 </body>
 
 </html>

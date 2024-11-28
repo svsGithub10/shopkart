@@ -138,8 +138,10 @@ public class NavigationController {
 	@GetMapping("/deleteProduct")
 	public String deleteProduct(@RequestParam long pid,HttpSession session, RedirectAttributes redirectAttributes) {
 		try {		
+			if((String)session.getAttribute("adminId")!=null) {
 			Products product=productService.findByPid(pid);
 			productService.deleteProduct(product);
+			}
 			redirectAttributes.addFlashAttribute("successMessage", "Product deleted successfully!");
 		}
 		catch(Exception e) {
@@ -194,7 +196,7 @@ public class NavigationController {
 	@GetMapping("/deleteUser")
 	public String deleteUser(@RequestParam long id,Model model, HttpSession session, RedirectAttributes redirectAttributes) {
 		try {
-		userService.deleteUser(id);
+		if((String)session.getAttribute("adminId")!=null) userService.deleteUser(id);
 		redirectAttributes.addFlashAttribute("successMessage", "User deleted successfully!");
 	}
 	catch(Exception e) {
@@ -203,4 +205,22 @@ public class NavigationController {
 	}
 		return "redirect:/allUsers";
 	}
+	
+	@GetMapping("/forgotPassword")
+	public String forgotPassword() {
+		return "/forgotPassword/main";
+	}
+	
+	@GetMapping("/verify")
+	public String verify() {
+		return "/forgotPassword/verify";
+	}
+	
+	@GetMapping("/verifyOtp")
+	public String verifyOtp() {
+		return "/verifyOtp";
+	}
+
 }
+	
+

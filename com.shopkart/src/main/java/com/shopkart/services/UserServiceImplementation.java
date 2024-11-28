@@ -14,6 +14,9 @@ public class UserServiceImplementation implements UserService {
 
 	@Autowired
 	UserRepository repo;
+
+	@Autowired
+	VerificationService verify;
 	
 	public void addUser(User user) {
 		repo.save(user);
@@ -36,7 +39,7 @@ public class UserServiceImplementation implements UserService {
 			return false;
 		}
 		else {
-			String dbPass = repo.findByEmail(email).getPassword();
+			String dbPass = verify.decrypt(repo.findByEmail(email).getPassword(),email);
 			if(password.equals(dbPass)) {
 			return true;
 			}

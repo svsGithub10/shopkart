@@ -26,9 +26,10 @@ public class AdminController {
 	@PostMapping("/addAdmin")
 	public String addAdmin(@ModelAttribute Admin admin,@RequestParam String secretCode) {
 		String adminId = admin.getAdminId();
+		String password = admin.getPassword();
 		
 		boolean status = service.adminExists(adminId, secretCode);
-		if(status == true) {
+		if(!adminId.isEmpty() && !password.isEmpty() && status == true) {
 			service.addAdmin(admin);
 			return "/validations/adminSuccess";
 		}
@@ -42,7 +43,7 @@ public class AdminController {
 			@RequestParam String password, HttpSession session,
 			Model model)	{
 		boolean status = service.validateAdmin(adminId, password);
-		if(status == true) {
+		if(!adminId.isEmpty() && !password.isEmpty() && status == true) {
 			session.setAttribute("adminId", adminId);
 			model.addAttribute("session", session);
 			return "redirect:/addProduct";

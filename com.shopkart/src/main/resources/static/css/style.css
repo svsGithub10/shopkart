@@ -5,6 +5,7 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Montserrat', sans-serif;
+    transition: ease-in-out 0.2s;
 }
 
 body{
@@ -273,6 +274,95 @@ h1 img{
     	cursor: pointer;
 	}
 }
+
+.container-f{
+	background-color: #fff;
+	border: solid black 1px;
+    border-radius: 30px;
+    box-shadow: 0 15px 25px rgba(0, 0, 0, 0.35);
+    position: relative;
+    overflow: hidden;
+    width: 500px;
+    max-width: 100%;
+    min-height: 380px;
+	form{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	margin: auto;
+	}
+    h1{
+    	margin: 20px 0 0 0;
+    }
+    h2{
+    	margin: 40px 0;
+    	display: flex;
+    	align-items: center;
+    }
+    input{
+    background-color: #eee;
+    border: none;
+    margin: 8px 0;
+    padding: 10px 15px;
+    font-size: 13px;
+    border-radius: 8px;
+    width: 50%;
+    outline: none;
+}
+button{
+    background-color: #101010;
+    color: #fff;
+    font-size: 12px;
+    padding: 10px 45px;
+    border: 1px solid transparent;
+    border-radius: 8px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    margin-top: 20px;
+    cursor: pointer;
+}
+		.cancel{
+			width: 100px;
+			font-size: 12px;
+			display:flex;
+			flex-direction: column;
+			align-items: center;
+			text-decoration: none;
+			margin: 10px 0 20px 0;
+			border: solid 1.5px #101010;
+			cursor:pointer;
+			background: #f1f1f1;
+			color: #101010;
+			padding: 8px 22px;
+    		border-radius: 8px;
+    		font-weight: 600;
+    		letter-spacing: 0.5px;
+    		text-transform: uppercase;
+		}
+		
+		.cancel:hover{
+    		background: #101010;
+			color: #f1f1f1;
+    	}
+
+}
+
+h1 .profilephoto {
+	width: 100%;
+    display: flex;
+    font-size: 24px;
+    align-items: center;
+    justify-content: start;
+    
+}
+
+
+.profilephoto img{
+    height: 45px;
+    margin-right: 5px;
+  	border-radius: 50%;
+} 
 
 
 	

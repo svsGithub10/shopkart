@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
+    <title>ShopKart - verify user email</title>
+</head>
+
+<body>
+  
+
+    <div class="container-f" id="container">
+    	
+    	
+        <form class="forgot" action="/verifyOtp" method="post" id="verify">
+        	<h1><span class="logo"><img src="/images/logo.png" alt="ShopKartlogo">hopKart</span></h1>
+        	<h2>If Email is valid, an OTP has sent</h2>
+        	
+        	<input name="OTP" type="text" placeholder="Enter OTP here">
+        	
+        	<button class="g-recaptcha" 
+       		data-sitekey="6LdPookqAAAAAMJH95JZli0a4BE_oSwdecWvjuFE" 
+        	data-callback='onSubmit' 
+        	data-action='submit'>Submit</button>
+        	<a class="cancel" href="/">Cancel</a>
+        	
+        </form>
+        
+    </div>
+    
+    
+
+    <script src="/script/script.js"></script>
+    <script>
+   		function onSubmit(token) {
+     		document.getElementById("verify").submit();
+   		}
+ 	</script>
+</body>
+
+</html>

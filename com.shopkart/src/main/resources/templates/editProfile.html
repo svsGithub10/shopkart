@@ -52,15 +52,19 @@ alert('[[${errorMessage}]]');
 		</div>
 		<div class="profile-info-edit">
 			<div>
-				<p><strong>Name:</strong> <input type="text" name="name" th:value="${user.name}" placeholder="Username"></p>
-				<p><strong>E-mail:</strong> <input readonly type="text" name="email" th:value="${user.email}" placeholder="E-mail"></p>
+				<p><strong>Name:</strong> <input  type="text" name="name" th:value="${user.name}" placeholder="Username"></p>
+				<p><strong>E-mail:</strong> <input  readonly type="text" name="email" th:value="${user.email}" placeholder="E-mail" onClick="alert('You cannot change verified Email');"></p>
+				
 			</div>
 			<div>
 				<p><strong>Mobile number:</strong> <input type="text" name="phone" th:value="${user.phone}" placeholder="Mobile number"></p>
 				<p><strong>Date of Birth: </strong><input type="date" name="dob" th:value="${user.dob}" ></p>
+				
 
 			</div>
+
 		</div>
+		<a href="/changepassword" class="changepassword">Change password</a>
 		<div class="profile-address">
 			<h2>Address</h2>
 			<div>

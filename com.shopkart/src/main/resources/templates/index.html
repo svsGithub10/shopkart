@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="/css/style.css">
+    <script src="https://www.google.com/recaptcha/api.js"></script>
     <title>ShopKart - Deal on!</title>
 </head>
 
@@ -14,7 +15,7 @@
 
     <div class="container" id="container">
         <div class="form-container sign-up">
-            <form action="/signup" method="post">
+            <form action="/signup" method="post" id="verify1">
                 <h1>Create Account <br/> <span class="logo"><img src="/images/logo.png" alt="ShopKartlogo">hopKart</span></h1>
                 <div class="social-icons">
                     <a href="#" class="icon" onclick="alert('Something went wrong! Try another way');"><i class="fa-brands fa-google-plus-g"></i></a>
@@ -27,11 +28,14 @@
                 <input type="email" placeholder="Email" name="email" required>
                 <!-- <p class="caution">Please remember your password for future purpose</p> -->
                 <input type="password" placeholder="Password" name="password" required>
-                <button type="submit">Sign Up</button>
+                        	<button class="g-recaptcha" 
+       		data-sitekey="6LdPookqAAAAAMJH95JZli0a4BE_oSwdecWvjuFE" 
+        	data-callback='onSubmit1' 
+        	data-action='submit'>sign up</button>
             </form>
         </div>
         <div class="form-container sign-in">
-            <form action="/login" method="post">
+            <form action="/login" method="post" id="verify2">
                 
                 <h1>Sign In <br/> <span class="logo"><img src="/images/logo.png" alt="ShopKartlogo">hopKart</span> </h1>
                
@@ -44,8 +48,11 @@
                 <span>or use your email password</span>
                 <input type="email" placeholder="Email" name="email" required>
                 <input type="password" placeholder="Password" name="password" required>
-                <a href="#">Forget Your Password?</a>
-                <button type="submit">Sign In</button>
+                <a href="/forgotPassword">Forget Your Password?</a>
+                        	<button class="g-recaptcha" 
+       		data-sitekey="6LdPookqAAAAAMJH95JZli0a4BE_oSwdecWvjuFE" 
+        	data-callback='onSubmit2' 
+        	data-action='submit'>Sign in</button>
             </form>
         </div>
         <div class="toggle-container">
@@ -68,6 +75,15 @@
     
 
     <script src="/script/script.js"></script>
+
 </body>
+        <script>
+   		function onSubmit1(token) {
+     		document.getElementById("verify1").submit();
+   		}
+   		function onSubmit2(token) {
+     		document.getElementById("verify2").submit();
+   		}
+ 	</script>
 
 </html>

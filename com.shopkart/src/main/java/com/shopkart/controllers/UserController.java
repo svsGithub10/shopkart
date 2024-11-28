@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shopkart.entities.Products;
 import com.shopkart.entities.User;
+import com.shopkart.services.VerificationService;
 import com.shopkart.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
@@ -24,15 +25,31 @@ public class UserController {
 	@Autowired
 	UserService service;
 
+	@Autowired
+	VerificationService verify;
+
+	private User tempUser;
+	private String tempOtp;
+	
 	@PostMapping("/signup")
 	public String addUser(@ModelAttribute User user) {
 		//user exists?
 		String name = user.getName();
 		String email = user.getEmail();
+		String password = user.getPassword();
+		String otp = verify.getAlphaNumericString(6);
+		tempUser=user;
+		tempOtp=otp;
 		boolean status = service.userExists(name, email);
-		if(status == false) {
-			service.addUser(user);
-			return "/validations/creationSuccess";
+		if(!name.isEmpty() && !email.isEmpty() && !password.isEmpty() && status == false) {
+            verify.sendEmail(email, 
+                    "ShopKart: Verify Email", 
+                    "Dear user, The One Time Password (OTP) to verify your email is \"" + otp + "\".\n\n"
+                    + "Do not share it with anyone. Please contact admin if it's not you.\n\n"
+                    + "This mail is auto-generated, please don't reply.\n\n"
+                    + "Warm regards,\nShopKart");
+
+			return "/verifyOtp";
 		}
 		else {
 			return "/validations/userExists";
@@ -40,19 +57,38 @@ public class UserController {
 		
 	}
 	
+	@PostMapping("/verifyOtp")
+	public String verifyOtp(@RequestParam String OTP) {
+		if (tempOtp != null && tempOtp.equals(OTP)) {
+			tempUser.setPassword(verify.encrypt(tempUser.getPassword(), tempUser.getEmail()));
+			service.addUser(tempUser);
+			return "/validations/creationSuccess";
+		}
+		else {
+			return "/validations/wrongOtp";
+		}
+	}
+	
 	@PostMapping("/login")
 	public String login(@RequestParam String email,
 			@RequestParam String password,
 			Model model, HttpSession session)	{
 		boolean status = service.validateUser(email, password);
-		if(status == true) {
+		
+		if(!password.isEmpty() && !email.isEmpty() && status == true) {
 			session.setAttribute("email", email);
 			model.addAttribute("session", session);
 			return "redirect:/home";
 		}
 		else {
+			//user exists?
+			if(service.getUserByEmail(email) == null) {
+				return "/validations/userNotFound";
+			}
+			else {
+				return "/validations/wrongPassword";
+			}
 			
-			return "/validations/userNotFound";
 		}
 	}
 
@@ -94,16 +130,14 @@ public class UserController {
 	}
 	
 	@PostMapping("/editUser")
-	public String updtaeUser(@RequestParam String name, 
-			@RequestParam String email, @RequestParam(required = false) String phone,
+	public String updtaeUser(@RequestParam String name, @RequestParam(required = false) String phone,
 			@RequestParam(required = false) String dob, @RequestParam(required = false) String gender,
-			@RequestParam(required = false) String password,
 			@RequestParam(required = false) String state, @RequestParam(required = false) String city,
 			@RequestParam(required = false) String pinCode, @RequestParam(required = false) String address1,
 			@RequestParam(required = false) String address2, @RequestParam(required = false) MultipartFile photo,
 			Model model,HttpSession session, RedirectAttributes redirectAttributes)	{
 		try {
-			User user=service.getUserByEmail(email);
+			User user=service.getUser(name);
 			
 			try {	
 				if (photo != null && !photo.isEmpty())
@@ -112,8 +146,6 @@ public class UserController {
 				e.printStackTrace();
 			}
 			if (name != null && !name.isEmpty()) user.setName(name);
-			if (email != null && !email.isEmpty()) user.setEmail(email);
-			if (password != null && !password.isEmpty()) user.setPassword(password);
 			if (phone != null && !phone.isEmpty()) user.setPhone(phone);
 			if (dob != null && !dob.isEmpty()) user.setDob(dob);
 			if (gender != null && !gender.isEmpty()) user.setGender(gender);
@@ -132,6 +164,9 @@ public class UserController {
 		}
 		return "redirect:/allUsers";
 	}
+	
+
+	
 	
 	
 }
