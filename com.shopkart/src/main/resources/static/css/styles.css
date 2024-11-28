@@ -157,6 +157,7 @@ h1 .logo {
 	.name {
 		font-size: 21px;
 		margin-bottom: 10px;
+		width: 100%;
 	}
 	a {
 	text-decoration: none;
@@ -381,12 +382,15 @@ form {
 		.add-to-cart{
 			margin: 5px 7px;
 			padding: 7px 10px;
+			text-decoration:none;
 			border-radius: 5px;
+			color: #101010;
 			border: solid 1.5px #101010;
 			cursor:pointer;
 		}
 		.add-to-cart:hover{
 			background: #101010;
+			
 			color: #f1f1f1;
 		}
 
@@ -397,6 +401,7 @@ form {
 			border: solid 1px #101010;
 			cursor:pointer;
 			background: #101010;
+			text-decoration:none;
 			color: #f1f1f1;
 		}
 	}

@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
 <link rel="stylesheet" href="/css/styles.css" />
-<title>ShopKart - Home</title>
+<title>ShopKart - User Cart</title>
 </head>
 <body>
 
@@ -27,7 +27,7 @@ alert('[[${errorMessage}]]');
 <div class="user-body">
 <div class="user-menu">
 	<div class="contain">
-		<a href="/userProfile" class="user"><img th:if="${user.photoBase64}" th:src="'data:image/jpeg;base64,' + ${user.photoBase64}" 
+		<a href="/cart" class="user"><img th:if="${user.photoBase64}" th:src="'data:image/jpeg;base64,' + ${user.photoBase64}" 
 			alt="profile" >
 		<p><span th:text="${user.name}"></span></p></a>
 		<div><a href="/home"><i class="fa fa-home"></i>Home</a></div>
@@ -38,18 +38,35 @@ alert('[[${errorMessage}]]');
 	</div>
 </div>
 <div class="container">
-	<span class="product" th:each="product : ${allProducts}">
-	    <img class="pimg" th:if="${product.photoBase64}" th:src="'data:image/jpeg;base64,' + ${product.photoBase64}" 
-		alt="Something went wrong!">
-		<div class="product-info">
-			<div class="name">
-			<a th:href="@{/orderProduct(pid = ${product.pid})}"><strong><span th:text="${product.brand}"></span></strong>
-			<span th:text="${product.pname}"></span></a></div>
-			<div class="price"><strong><span th:text="@{'₹'+${product.price}}+'.00'"></span></strong></div>
-			<span th:utext="${product.pdescription}"></span>
-		</div>
-	</span>
-</div>
+	    <h1>Your Cart</h1>
+
+    <div th:if="${cartItems.isEmpty()}">
+        <p>Your cart is empty.</p>
+    </div>
+
+    <table th:if="${!cartItems.isEmpty()}">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="cart : ${cartItems}">
+                <td th:text="${cart.product.pname}"></td>
+                <td th:text="${cart.product.price}"></td>
+                <td>1</td>
+                <td>
+                    <a th:href="@{/removeCartItem(id=${cart.id})}">Remove</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="/home">Continue Shopping</a>
+
 </div>
 	
 </body>

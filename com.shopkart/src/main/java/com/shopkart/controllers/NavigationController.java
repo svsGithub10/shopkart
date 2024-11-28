@@ -11,9 +11,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.shopkart.entities.Admin;
+import com.shopkart.entities.Cart;
 import com.shopkart.entities.Products;
 import com.shopkart.entities.User;
 import com.shopkart.services.AdminService;
+import com.shopkart.services.CartService;
 import com.shopkart.services.ProductsService;
 import com.shopkart.services.UserService;
 
@@ -30,6 +32,9 @@ public class NavigationController {
 	
 	@Autowired
 	AdminService adminService;
+	
+    @Autowired
+    private CartService cartService;
 
 	@GetMapping("/")
 	public String index() {
@@ -47,6 +52,10 @@ public class NavigationController {
 	public String home(Model model, HttpSession session) {
 
 		String email=(String) session.getAttribute("email");
+        if (email == null) {
+            // If user is not logged in, redirect to login
+            return "redirect:/logout";
+        }
 		User user=userService.getUserByEmail(email);
 		model.addAttribute("user", user);
 		
@@ -79,6 +88,10 @@ public class NavigationController {
 	public String addProduct(Model model, HttpSession session) {
 		
 		String adminId=(String) session.getAttribute("adminId");
+        if (adminId == null) {
+            // If user is not logged in, redirect to login
+            return "redirect:/admin";
+        }
 		Admin admin = adminService.getAdminId(adminId);
 		model.addAttribute("admin", admin);
 		
@@ -99,6 +112,10 @@ public class NavigationController {
 		try {
 			
 			String email=(String) session.getAttribute("email");
+	        if (email == null) {
+	            // If user is not logged in, redirect to login
+	            return "redirect:/logout";
+	        }
 			User user=userService.getUserByEmail(email);
 			model.addAttribute("user", user);
 			
@@ -121,6 +138,10 @@ public class NavigationController {
 							  ) {
 		try {
 			String adminId=(String) session.getAttribute("adminId");
+	           if (adminId == null) {
+	                // If user is not logged in, redirect to login
+	                return "redirect:/admin";
+	            }
 			Admin admin = adminService.getAdminId(adminId);
 			model.addAttribute("admin", admin);
 			
@@ -154,6 +175,10 @@ public class NavigationController {
 	@GetMapping("/userProfile")
 	public String userProfile(Model model, HttpSession session) {
 		String email=(String) session.getAttribute("email");
+        if (email == null) {
+            // If user is not logged in, redirect to login
+            return "redirect:/logout";
+        }
 		User user=userService.getUserByEmail(email);
 		model.addAttribute("user", user);
 		
@@ -163,6 +188,10 @@ public class NavigationController {
 	@GetMapping("/editProfile")
 	public String editProfile(Model model, HttpSession session) {
 		String email=(String) session.getAttribute("email");
+        if (email == null) {
+            // If user is not logged in, redirect to login
+            return "redirect:/logout";
+        }
 		User user=userService.getUserByEmail(email);
 		model.addAttribute("user", user);
 		
@@ -173,6 +202,10 @@ public class NavigationController {
 	public String allUsers(Model model, HttpSession session) {
 		
 		String adminId=(String) session.getAttribute("adminId");
+        if (adminId == null) {
+            // If user is not logged in, redirect to login
+            return "redirect:/admin";
+        }
 		Admin admin = adminService.getAdminId(adminId);
 		model.addAttribute("admin", admin);
 		
@@ -185,6 +218,10 @@ public class NavigationController {
 	public String editUser(@RequestParam long id,Model model, HttpSession session) {
 		
 		String adminId=(String) session.getAttribute("adminId");
+        if (adminId == null) {
+            // If user is not logged in, redirect to login
+            return "redirect:/admin";
+        }
 		Admin admin = adminService.getAdminId(adminId);
 		model.addAttribute("admin", admin);
 		
@@ -224,11 +261,35 @@ public class NavigationController {
 	@GetMapping("/changePassword")
 	public String changePassword(Model model, HttpSession session) {
 		String email=(String) session.getAttribute("email");
+        if (email == null) {
+            // If user is not logged in, redirect to login
+            return "redirect:/logout";
+        }
 		User user=userService.getUserByEmail(email);
 		model.addAttribute("user", user);
 		return "changePassword";
 	}
-
+	
+	@GetMapping("/cart")
+	public String AddToCart(Model model, HttpSession session) {
+		String email=(String) session.getAttribute("email");
+        if (email == null) {
+            // If user is not logged in, redirect to login
+            return "redirect:/logout";
+        }
+		User user=userService.getUserByEmail(email);
+		model.addAttribute("user", user);
+		if (user == null) {
+            // Handle case where user is not found
+            return "redirect:/home";
+        }
+		
+		List<Cart> cartItems = cartService.fetchUserCart(user);
+		
+		model.addAttribute("cartItems", cartItems);
+		
+		return "/cart";
+	}
 }
 	
 
