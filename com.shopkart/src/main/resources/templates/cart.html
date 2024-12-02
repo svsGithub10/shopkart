@@ -38,34 +38,33 @@ alert('[[${errorMessage}]]');
 	</div>
 </div>
 <div class="container">
-	    <h1>Your Cart</h1>
+	<div class="cart-display">
+	    <div class="head"><h1>Your Cart</h1></div>
 
     <div th:if="${cartItems.isEmpty()}">
         <p>Your cart is empty.</p>
     </div>
 
     <table th:if="${!cartItems.isEmpty()}">
-        <thead>
-            <tr>
-                <th>Product Name</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
         <tbody>
             <tr th:each="cart : ${cartItems}">
-                <td th:text="${cart.product.pname}"></td>
-                <td th:text="${cart.product.price}"></td>
-                <td>1</td>
+            	<td><img th:if="${cart.product.photoBase64}" th:src="'data:image/jpeg;base64,' + ${cart.product.photoBase64}" 
+            	alt="product" ></td>
+                <td th:text="${cart.product.brand}"></td>
+                <td class="pname" th:text="${cart.product.pname}"></td>
+                <td th:text="@{'₹'+${cart.product.price}}"></td>
                 <td>
-                    <a th:href="@{/removeCartItem(id=${cart.id})}">Remove</a>
+                    <a th:href="@{/buyProduct(pid=${cart.product.pid})}" class="check-out">Check out</a>
+                </td>
+                <td>
+                    <a th:href="@{/removeCartItem(id=${cart.id})}" class="remove" onClick="return confirm('Are you sure?')"><i class="fa fa-trash" style="font-size:14px; margin-right: 2px;" aria-hidden="true"></i>Remove</a>
                 </td>
             </tr>
         </tbody>
     </table>
 
-    <a href="/home">Continue Shopping</a>
+    <a href="/home" style="margin: 30px 0;"><button>Continue Shopping</button></a>
+    </div>
 
 </div>
 	

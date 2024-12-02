@@ -49,7 +49,7 @@ public class CartController {
             // Check if the product is already in the cart
             if (service.findByUserAndProduct(user, product).isPresent()) {
                 // If the product is already in the cart, redirect with a message
-            	redirectAttributes.addFlashAttribute("successMessage", "Product is already in the cart.");
+            	redirectAttributes.addFlashAttribute("errorMessage", "Product is already in the cart");
                 return "redirect:/cart"; // Adjust to the appropriate page
             }
 
@@ -60,12 +60,32 @@ public class CartController {
 
             // Save to database
             service.saveCart(cart);
-            redirectAttributes.addFlashAttribute("successMessage", "Product added to cart.");
+            redirectAttributes.addFlashAttribute("successMessage", "Product added to cart");
             return "redirect:/home"; // Redirect to cart view
         } catch (Exception e) {
-        	redirectAttributes.addFlashAttribute("successMessage", "Failed to add "+e.getMessage());
+        	redirectAttributes.addFlashAttribute("errorMessage", "Failed to add "+e.getMessage());
             return "redirect:/home";
         }
     }
-
+    
+    @GetMapping("/removeCartItem")
+    public String removeItem(@RequestParam long id, HttpSession session, RedirectAttributes redirectAttributes) {
+	
+		String email=(String) session.getAttribute("email");
+        if (email == null) {
+            // If user is not logged in, redirect to login
+            return "redirect:/logout";
+        }
+        try {
+        	service.remove(id);
+        	redirectAttributes.addFlashAttribute("successMessage", "Product removed");
+        	return "redirect:/cart";
+        }
+        catch(Exception e) {
+        	redirectAttributes.addFlashAttribute("errorMessage", "Failed to remove "+e.getMessage());
+        	return "redirect:/cart";
+        }
+	}
+	
 }
+

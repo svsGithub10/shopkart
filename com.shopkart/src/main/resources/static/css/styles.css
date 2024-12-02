@@ -138,6 +138,7 @@ h1 .logo {
 
 .pimg{
 	height: 250px;
+	width: 250px;
 	min-width: 300px;
 	border-radius: 10px;
 	object-fit: contain;
@@ -193,6 +194,7 @@ display: flex;
 
 .pimg{
 	height: 250px;
+	width: 250px;
 	min-width: 300px;
 	border-radius: 10px;
 	object-fit: contain;
@@ -281,6 +283,7 @@ button{
     text-transform: uppercase;
     margin-top: 10px;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .update-product {
@@ -658,5 +661,47 @@ table{
 
 	}
 }
+
+.cart-display{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 100%;
+	.pname{
+		width: 300px;
+	}
+	.head h1{width: 100%;}
+	table{
+		margin: 0 10px;
+		img{height: 150px; width: 150px; object-fit: contain;mix-blend-mode: multiply;}
+	}
+	.check-out{
+			
+			padding: 5px 10px;
+			text-decoration:none;
+			border-radius: 5px;
+			color: #101010;
+			border: solid 1.5px #101010;
+			cursor:pointer;
+		}
+		.check-out:hover{
+			background: #101010;
+			
+			color: #f1f1f1;
+		}
+
+		.remove{
+		
+			padding: 5px 10px;
+			border-radius: 5px;
+			border: solid 1px #101010;
+			cursor:pointer;
+			background: #101010;
+			text-decoration:none;
+			color: #f1f1f1;
+		}
+}
+
+
 
 

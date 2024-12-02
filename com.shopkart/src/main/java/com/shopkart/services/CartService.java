@@ -14,4 +14,6 @@ public interface CartService {
 	public Optional<Cart> findByUserAndProduct(User user, Products product);
 
 	List<Cart> fetchUserCart( User user);
+
+	public void remove(long id);
 }

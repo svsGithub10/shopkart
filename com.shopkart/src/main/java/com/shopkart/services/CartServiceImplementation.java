@@ -31,6 +31,12 @@ public class CartServiceImplementation implements CartService {
 		return repo.findByUser(user);
 	}
 
+	@Override
+	public void remove(long id) {
+		// TODO Auto-generated method stub
+		repo.deleteById(id);
+	}
+
 
 
 }
