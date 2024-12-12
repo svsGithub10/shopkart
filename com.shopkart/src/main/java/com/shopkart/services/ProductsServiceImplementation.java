@@ -62,5 +62,14 @@ public class ProductsServiceImplementation implements ProductsService{
 		return String.join("<br>", Arrays.copyOfRange(lines, 0,lines.length));
 	}
 
+	@Override
+	public String truncateToSingleLine(String description) {
+		if (description == null || description.isEmpty()) {
+            return description;
+        }
+        String[] lines = description.split("\n");
+        return lines[0];
+	}
+
 	
 }

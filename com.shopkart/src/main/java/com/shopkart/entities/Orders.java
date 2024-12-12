@@ -15,6 +15,8 @@ public class Orders {
 	
 	private String orderId;
 	
+	private String address;
+	
 	@ManyToOne
 	private Products product;
 
@@ -28,10 +30,11 @@ public class Orders {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Orders(long oid, String orderId, Products product, User user, String oStatus) {
+	public Orders(long oid, String orderId, String address, Products product, User user, String oStatus) {
 		super();
 		this.oid = oid;
 		this.orderId = orderId;
+		this.address = address;
 		this.product = product;
 		this.user = user;
 		this.oStatus = oStatus;
@@ -51,6 +54,14 @@ public class Orders {
 
 	public void setOrderId(String orderId) {
 		this.orderId = orderId;
+	}
+	
+	public String getAddress() {
+		return address;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
 	}
 
 	public Products getProduct() {
@@ -79,7 +90,7 @@ public class Orders {
 
 	@Override
 	public String toString() {
-		return "Order [oid=" + oid + ", orderId=" + orderId + ", product=" + product + ", user=" + user + ", oStatus="
+		return "Order [oid=" + oid + ", orderId=" + orderId + ", address=" + address + ", product=" + product + ", user=" + user + ", oStatus="
 				+ oStatus + "]";
 	}
 	

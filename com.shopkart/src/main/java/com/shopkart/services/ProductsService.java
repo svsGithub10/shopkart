@@ -19,6 +19,8 @@ public interface ProductsService {
 	
 	String truncateToThreeLines(String description);
 
+	String truncateToSingleLine(String description);
+
 	String toNewLines(String description);
 
 }

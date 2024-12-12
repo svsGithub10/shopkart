@@ -84,7 +84,9 @@ h1 .logo {
 }  
 
 .user-menu{
-	width: 23%;
+	width: 335px;
+	left: 10px;
+	position: fixed;
 	height: 800px;
 	background: #f1f1f1;
 	margin: 85px auto auto auto;
@@ -122,9 +124,9 @@ h1 .logo {
    
 }
 .container{
-	width: 75%;
+	width: 100%;
 	background: #f1f1f1;
-	margin: 85px auto auto auto;
+	margin: 85px 10px auto 355px;
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 	display: flex;
 	flex-direction: column; 
@@ -171,9 +173,9 @@ h1 .logo {
 }
 
 .container-p {
-	width: 75%;
+	width: 100%;
 	background: #f1f1f1;
-	margin: 85px auto auto auto;
+	margin: 85px 10px auto 355px;
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 	display: flex;
 	flex-direction: column; 
@@ -250,16 +252,6 @@ display: flex;
 	
 }
 }
-
-.add-product{
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	h2{
-	margin-top: 25px;
-	}
-}
-  
 input, textarea{
     background-color: #eee;
     border: none;
@@ -271,6 +263,17 @@ input, textarea{
     width: 75%;
     outline: none;
 }
+.add-product{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	h2{
+	margin-top: 15px;
+	}
+	input{margin: 0.5px auto;}
+}
+  
+
 button{
     background-color: #101010;
     color: #fff;
@@ -327,9 +330,9 @@ form {
 }
 
 .order-container {
-	width: 75%;
+	width: 100%;
 	background: #f1f1f1;
-	margin: 85px auto auto auto;
+	margin: 85px 10px auto 355px;
 	box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
 	display: flex;
 	flex-direction: column; 
@@ -702,6 +705,126 @@ table{
 		}
 }
 
+	.change{
+			margin-top: 8px; 
+			padding: 5px 10px;
+			text-decoration:none;
+			border-radius: 5px;
+			color: #101010;
+			border: solid 1.5px #101010;
+			cursor:pointer;
+		}
+		.change:hover{
+			background: #101010;
+			
+			color: #f1f1f1;
+		}
 
+
+hr{
+	margin: 20px auto;
+	
+	width: 98%;
+	background: #101010;
+}
+
+.delivery-address{
+	width: 100%;
+	margin: 0px auto auto auto;
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	h2{margin: 0 auto 15px 14px;}
+	.deliverh2{margin-top: 30px;}
+	hr{margin:0;}pre{margin: 15px auto auto 14px;}
+	input{border:none; height: 10px;font-size: 15px;}
+	div{
+		display: flex;
+		
+	}
+	.check-box{
+	width: 100%;
+	margin: 10px auto auto 0;
+/* Customize the label (the container) */
+.container-1 {
+  display: block;
+  position: relative;
+  padding-left: 25px;
+  margin: 12px auto;
+  cursor: pointer;
+ 	font-weight: 400;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  
+}
+
+/* Hide the browser's default checkbox */
+.container-1 input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container-1:hover input ~ .checkmark {
+  background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container-1 input:checked ~ .checkmark {
+  background-color: #101010;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container-1 input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-1 .checkmark:after {
+  left: 6px;
+  top: 1px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+	}
+}
+
+.product-c1{
+	display: flex;
+	align-items: center;
+}
+
+.total{
+	margin-top: 10px;
+	font-weight: 600;
+	font-size: 20px;
+}
 
 

@@ -290,6 +290,37 @@ public class NavigationController {
 		
 		return "/cart";
 	}
+	
+	@GetMapping("/checkOut")
+	public String checkOut(@RequestParam long pid, Model model, HttpSession session, RedirectAttributes redirectAttributes) {
+		String email=(String) session.getAttribute("email");
+        if (email == null) {
+            // If user is not logged in, redirect to login
+            return "redirect:/logout";
+        }
+		User user=userService.getUserByEmail(email);
+		model.addAttribute("user", user);
+		if (user == null) {
+            // Handle case where user is not found
+            return "redirect:/home";
+        }
+		try {
+		Products product=productService.findByPid(pid);
+		product.setPdescription(productService.truncateToSingleLine(product.getPdescription()));
+		
+		model.addAttribute("product", product);
+		
+		
+		return "checkOut";
+		}catch(Exception e) {
+			return "home";
+		}
+	}
+	
+	@GetMapping("/payment")
+	public String payment() {
+		return "payment";
+	}
 }
 	
 

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+<link rel="stylesheet" href="/css/styles.css" />
+<title>ShopKart - Product Overview</title>
+</head>
+<body>
+
+<nav class="navigation">
+    <h1> <span class="logo"><img src="/images/logo.png" alt="ShopKartlogo">hopKart</span></h1>
+    <div class="search-bar"></div>
+    <div class="nav-links">
+        <a class="cart" href="/cart"><i class="fa fa-shopping-cart" aria-hidden="true"> </i>Cart</a>
+        <a class="logout" href="/logout">logout</a>
+    </div>
+</nav>
+
+<div class="user-body">
+
+<div class="user-menu">
+    <div class="contain">
+        <a href="/userProfile" class="user"><img th:if="${user.photoBase64}" th:src="'data:image/jpeg;base64,' + ${user.photoBase64}" 
+            alt="profile" >
+        <p><span th:text="${user.name}"></span></p></a>
+        <div><a href="/home"><i class="fa fa-home"></i>Home</a></div>
+        <div><a href="#"><i class="fa-solid fa-box"></i>My Orders</a></div>
+        <div><a href="#"><i class="fa-solid fa-file-contract"></i>Terms & Conditions</a></div>
+        <div><a href="#"><i class="fa fa-info-circle"></i>About Us</a></div>
+        <div><a href="#"><i class="fa fa-address-book"></i>Contact Us</a></div>
+    </div>
+</div>
+
+<div class="order-container">
+	<form th:action="@{/placeOrder(pid = ${product.pid})}" method="post" >
+    <div class="delivery-address">
+        <h2 class="deliverh2">Deliver to:</h2>
+			<div>
+        		<input type="text" name="address1" placeholder="Address line 1" th:value="${user.address1}">
+        		<input type="text" name="address2" placeholder="Address line 2" th:value="${user.address2}"><br>
+			</div>
+			<div>
+        		<input type="text" name="city" placeholder="City" th:value="${user.city}"><br>
+        		<input type="text" name="state" placeholder="State" th:value="${user.state}">
+        		<input type="text" name="pinCode" placeholder="Pin Code" th:value="${user.pinCode}"><br>
+        	</div>
+
+
+        <div class="check-box">
+			<label class="container-1">Update address to profile
+  				<input type="checkbox" checked="checked" name="addressUpdate" value="true">
+  				<span class="checkmark"></span>
+			</label>
+        </div>
+    </div>
+    
+    <hr>
+    
+    <div class="product-c1">
+        <img class="pimg" th:if="${product.photoBase64}" th:src="'data:image/jpeg;base64,' + ${product.photoBase64}" 
+        alt="Something went wrong!">
+        <div class="product-info">
+            <div class="name">
+            <a th:href="@{/orderProduct(pid = ${product.pid})}"><strong><span th:text="${product.brand}"></span></strong>
+            <span th:text="${product.pname}"></span></a></div>
+            <span class="spec" th:utext="${#strings.replace(product.pdescription, '\n', '<br>')}"></span>
+            <div class="price"><strong><span th:text="@{'₹'+${product.price}}+'.00'"></span></strong></div>
+        </div>
+    </div>
+    
+    <hr>
+
+    <div class="delivery-address">
+        <h2>Price details:</h2>
+        <pre>Product price             : ₹<span  th:text="${product.price}+'.00'"></span><br><br>Shipping charge       : ₹60.00
+        <hr><div class="total">Total                    : ₹<span id="price-details" th:text="${product.price}"></span>.00</div></pre>
+    </div>
+	
+    <div class="check-out">
+        <a th:href="@{/orderProduct(pid = ${product.pid})}" class="add-to-cart">Cancel</a>
+        <button type="submit" class="buy-now">Place order</button>
+    </div>
+</div>
+</form>
+</div>
+
+
+<script>
+    // Recalculate and update price on page load
+    document.addEventListener("DOMContentLoaded", function () {
+        // Get the current price
+        const priceElement = document.getElementById("price-details");
+        let priceText = priceElement.innerText.trim();
+
+        // Remove commas and convert to integer
+        let numericPrice = parseInt(priceText.replace(/,/g, ""), 10);
+
+        // Add 60 to the price
+        numericPrice += 60;
+
+        // Format the new price with commas
+        const formattedPrice = numericPrice.toLocaleString("en-US");
+
+        // Update the price element
+        priceElement.innerText = formattedPrice;
+    });
+</script>
+
+</body>
+</html>

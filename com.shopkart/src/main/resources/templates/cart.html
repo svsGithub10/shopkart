@@ -54,7 +54,7 @@ alert('[[${errorMessage}]]');
                 <td class="pname" th:text="${cart.product.pname}"></td>
                 <td th:text="@{'₹'+${cart.product.price}}"></td>
                 <td>
-                    <a th:href="@{/buyProduct(pid=${cart.product.pid})}" class="check-out">Check out</a>
+                    <a th:href="@{/orderProduct(pid = ${cart.product.pid})}" class="check-out">Check out</a>
                 </td>
                 <td>
                     <a th:href="@{/removeCartItem(id=${cart.id})}" class="remove" onClick="return confirm('Are you sure?')"><i class="fa fa-trash" style="font-size:14px; margin-right: 2px;" aria-hidden="true"></i>Remove</a>

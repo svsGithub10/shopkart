@@ -62,7 +62,7 @@
 
 			<div class="check-out">
 				<a th:href="@{/addCart(pid = ${product.pid})}" class="add-to-cart"><i class="fa fa-shopping-cart" aria-hidden="true"> </i>Add to Cart</a>
-				<a href="#" class="buy-now">Buy now</a>
+				<a th:href="@{/checkOut(pid = ${product.pid})}" class="buy-now">Buy now</a>
 			</div>
 		
 	</span>
