@@ -50,10 +50,7 @@ com.shopkart/
    ```sh
    ./mvnw spring-boot:run
    ```
-
-## 📸 Screenshots
-![Home Page](https://via.placeholder.com/800x400)
-
+   
 ## 🤝 Contributing
 Contributions are welcome! Feel free to fork the repo and submit a pull request.
 
@@ -64,4 +61,4 @@ This project is licensed under the MIT License.
 GitHub Repository: [ShopKart](https://github.com/svsGithub10/shopkart)
 
 ## 📧 Contact
-For any queries, reach out at [your-email@example.com](mailto:your-email@example.com).
+For any queries, reach out at [your-email@example.com](mailto:shantaveereshvs@gmail.com).
