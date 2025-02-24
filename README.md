@@ -1,6 +1,6 @@
 # ShopKart
 
-![ShopKart Logo](https://via.placeholder.com/150)
+![ShopKart Logo](com.shopkart/src/main/resources/static/images/logo.png)
 
 ShopKart is an e-commerce platform designed to provide a seamless shopping experience. It includes features such as product listings, user authentication, and order management. The project is currently in development, with plans to implement a payment system and bill generation.
 
