@@ -61,4 +61,4 @@ This project is licensed under the MIT License.
 GitHub Repository: [ShopKart](https://github.com/svsGithub10/shopkart)
 
 ## 📧 Contact
-For any queries, reach out at [your-email@example.com](mailto:shantaveereshvs@gmail.com).
+For any queries, reach out at [Shantveeresh Sheelavantar](mailto:shantaveereshvs@gmail.com).
